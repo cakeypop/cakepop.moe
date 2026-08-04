@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kraken Submersibles — NMSU Autonomous Underwater Vehicle</title>
+  <meta name="description"
+    content="New Mexico State University's autonomous underwater vehicle team, competing in RoboSub 2026." />
+
+  <!-- TODO: replace href with your actual favicon (export from your logo) -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+  <!-- Fonts: Montserrat (Gotham-alike, SIL OFL) + JetBrains Mono (Apache 2.0) -->
+  <!-- Both fonts are free for unlimited commercial use without attribution. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Scoped Kraken stylesheet — only applies inside .kraken container -->
+  <link rel="stylesheet" href="kraken.css" />
+</head>
+
+<body>
+
+  <!-- =====================================================================
+     KRAKEN PAGE CONTAINER
+     All styles in kraken.css are scoped under .kraken so they won't
+     affect the rest of your personal site.
+     ===================================================================== -->
+  <div class="kraken">
+
+    <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+    <nav class="nav" id="kraken-nav">
+      <div class="nav__inner">
+        <a href="#top" class="nav__brand">
+          <!-- TODO: replace with your logo file (assets/img/logo.png or .svg) -->
+          <img src="assets/img/logo.png" alt="Kraken Submersibles" class="nav__logo" />
+          <span class="nav__brand-text">
+            <span class="nav__brand-main">KRAKEN</span>
+            <span class="nav__brand-sub">SUBMERSIBLES · NMSU</span>
+          </span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="#vehicle">Vehicle</a></li>
+          <li><a href="#systems">Systems</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#sponsors">Sponsors</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav__menu-btn" aria-label="Open menu" id="kraken-menuBtn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ============================================
+       HERO
+       ============================================ -->
+    <header class="hero" id="top">
+      <div class="hero__bg">
+        <!-- TODO: replace with hero image/video of the AUV.
+           For a video background, swap the <img> for:
+           <video autoplay muted loop playsinline poster="assets/img/hero-poster.jpg">
+             <source src="assets/video/hero.mp4" type="video/mp4">
+           </video>
+      -->
+        <img src="assets/img/hero.jpg" alt="" class="hero__img" />
+        <div class="hero__overlay"></div>
+        <div class="hero__grid"></div>
+      </div>
+
+      <div class="hero__content">
+        <div class="hero__eyebrow">
+          <span class="dot"></span>
+          <span>NEW MEXICO STATE UNIVERSITY · ROBOSUB 2026</span>
+        </div>
+
+        <h1 class="hero__title">
+          <span class="hero__title-line">Engineering</span>
+          <span class="hero__title-line hero__title-line--accent">autonomy</span>
+          <span class="hero__title-line">beneath the surface.</span>
+        </h1>
+
+        <p class="hero__lede">
+          We are an interdisciplinary student team designing, building, and
+          deploying an autonomous underwater vehicle from the high desert of
+          Las Cruces, New Mexico.
+        </p>
+
+        <div class="hero__cta">
+          <a href="#vehicle" class="btn btn--primary">Meet the Vehicle</a>
+          <a href="#team" class="btn btn--ghost">The Team</a>
+        </div>
+      </div>
+
+      <a href="#about" class="hero__scroll" aria-label="Scroll down">
+        <span>SCROLL</span>
+        <span class="hero__scroll-line"></span>
+      </a>
+    </header>
+
+    <!-- ============================================
+       ABOUT
+       ============================================ -->
+    <section class="section about" id="about">
+      <div class="section__inner about__grid">
+        <div class="about__label">
+          <span class="label-num">01</span>
+          <span class="label-text">About the Team</span>
+        </div>
+
+        <div class="about__body">
+          <h2 class="section__title">
+            A first-year team competing<br />
+            <em>in the RoboSub 2026 Competition</em>
+          </h2>
+
+          <p class="lead">
+            Kraken Submersibles is New Mexico State University's inaugural
+            entry into the RoboSub competition — an international challenge
+            where teams design fully autonomous underwater vehicles to
+            navigate gates, identify markers, and engage targets without any
+            surface communication.
+          </p>
+
+          <p>
+            <!-- TODO: Customize this paragraph. Suggested talking points:
+               - Founding story / why the team started
+               - Department / college affiliation
+               - Mentorship from external university teams -->
+            Founded through the NMSU College of Engineering Capstone program,
+            our team brings together students across electrical, mechanical,
+            and computer engineering disciplines. We work out of dedicated lab
+            space in Goddard Hall and collaborate with established programs at
+            ASU and SDSU as we build the foundation for years of NMSU
+            competition entries to come.
+          </p>
+
+          <div class="about__pillars">
+            <div class="pillar">
+              <div class="pillar__icon">⚙</div>
+              <h3>Design</h3>
+              <p>Full-stack engineering from machined frame to PCB-level signal acquisition.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">⌬</div>
+              <h3>Build</h3>
+              <p>In-house fabrication, assembly, and bring-up of every subsystem.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">≋</div>
+              <h3>Deploy</h3>
+              <p>Pool testing at the NMSU Aquatic Center.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       VEHICLE: NAUTILUS
+       ============================================ -->
+    <section class="section vehicle" id="vehicle">
+      <div class="section__inner">
+        <div class="section__header">
+          <div class="section__eyebrow">
+            <span class="label-num">02</span>
+            <span class="label-text">The Vehicle</span>
+          </div>
+          <h2 class="section__title">
+            <span class="vehicle__name">Nautilus</span>
+            <span class="vehicle__tag">Generation I</span>
+          </h2>
+        </div>
+
+        <div class="vehicle__hero">
+          <div class="vehicle__hero">
+            <video autoplay muted loop playsinline poster="assets/img/vehicle-hero.jpg">
+              <source src="assets/video/nautilus-turntable.mp4" type="video/mp4">
+            </video>
+            <div class="vehicle__hero-caption">
+              <span>FIG. 01</span>
+              <span>NAUTILUS · GEN I · 2026</span>
+            </div>
+          </div>
+
+          <div class="vehicle__specs">
+            <h3 class="specs__title">Vehicle Specifications</h3>
+            <div class="specs__grid">
+              <!-- TODO: confirm/edit specs as the design finalizes -->
+              <div class="spec">
+                <div class="spec__key">Frame</div>
+                <div class="spec__val">Aluminum T-Slot & HDPE</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Mass</div>
+                <div class="spec__val">38.5 kg</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Dimensions</div>
+                <div class="spec__val">18.75 × 20 × 27 mm</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Depth Rating</div>
+                <div class="spec__val">100 m</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Thrusters</div>
+                <div class="spec__val">8 × BlueRobotics T200</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Compute</div>
+                <div class="spec__val">NVIDIA Jetson Orin Nano</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Flight Controller</div>
+                <div class="spec__val">CubePilot Cube Orange+ · ArduSub</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Power</div>
+                <div class="spec__val">Dual 4S LiPo · 14.8 V bus</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Acoustics</div>
+                <div class="spec__val">4 × AS-1 hydrophones</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Navigation</div>
+                <div class="spec__val">Nortek Nucleus1000 DVL</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Vision</div>
+                <div class="spec__val">ZED Mini stereo + Waveshare IR-Cut</div>
+              </div>
+              <div class="spec">
+                <div class="spec__key">Endurance</div>
+                <div class="spec__val">~77 min nominal</div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+       SUBSYSTEMS
+       ============================================ -->
+    <section class="section systems" id="systems">
+      <div class="section__inner">
+        <div class="section__header">
+          <div class="section__eyebrow">
+            <span class="label-num">03</span>
+            <span class="label-text">Subsystems</span>
+          </div>
+          <h2 class="section__title">Engineered, end-to-end.</h2>
+          <p class="section__lede">
+            Every layer of the Nautilus, including machined aluminum, computer vision inference, 
+            and a custom designed circuit, are all designed and integrated by our team.
+          </p>
+        </div>
+
+        <div class="systems__grid">
+
+          <!-- MECHANICAL -->
+          <article class="system">
+            <div class="system__media">
+              <!-- TODO: photo or CAD render of frame / hull -->
+              <img src="assets\img\nautilus_frame_drawing.png" alt="Mechanical subsystem" />
+            </div>
+            <div class="system__body">
+              <div class="system__tag">MECHANICAL</div>
+              <h3>Frame &amp; Hull</h3>
+              <p>
+                Made with Aluminum T-slots and an HDPE top plate, dual 6" Acrylic
+                housings are home to the electronics & 4S LiPo batteries. Designed for
+                neutral buoyancy and serviceability between competition runs.
+              </p>
+              <ul class="system__list">
+                <li>Custom aluminum T-Slot frame</li>
+                <li>Acrylic / aluminum pressure vessel</li>
+                <li>Modular frame, electronics, &amp; battery enclosures</li>
+                <li>Integrated grabber, torpedo launchers, &amp; dropper</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- ELECTRICAL -->
+          <article class="system">
+            <div class="system__media">
+              <!-- TODO: photo of PCB, wiring, or PDB -->
+              <img src="assets\img\nautilus_power_diagram.png" alt="Electrical subsystem" />
+            </div>
+            <div class="system__body">
+              <div class="system__tag">ELECTRICAL</div>
+              <h3>Power &amp; Signal</h3>
+              <p>
+                Dual 4S LiPo batteries feed a multi-rail bus distributed
+                through a Holybro PM07. Custom PCBs handle hydrophone
+                amplification, ADC, and sensor integration.
+              </p>
+              <ul class="system__list">
+                <li>Dual 4S LiPo · 236 Wh usable</li>
+                <li>4-ch Hydrophone JFET Differential Preamp + ADC</li>
+                <li>Blue Sea ML-RBS main relay + fuse protection</li>
+                <li>Phantom-powered AS-1 hydrophone array</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- SOFTWARE -->
+          <article class="system">
+            <div class="system__media">
+              <!-- TODO: screenshot of CV stack, ROS graph, or telemetry UI -->
+              <img src="assets/img/system-software.jpg" alt="Software subsystem" />
+            </div>
+            <div class="system__body">
+              <div class="system__tag">SOFTWARE &amp; AUTONOMY</div>
+              <h3>Perception &amp; Control</h3>
+              <p>
+                YOLOv9 vision on a CUDA-accelerated Jetson Orin Nano runs
+                alongside ArduSub flight control, fused with DVL navigation
+                and acoustic localization via TDOA on the hydrophone array.
+              </p>
+              <ul class="system__list">
+                <li>Jetson Orin Nano · OpenCV w/ CUDA</li>
+                <li>YOLOv9 underwater object detection</li>
+                <li>MAVLink ↔ ArduSub over USB-UART</li>
+                <li>TDOA acoustic localization (44.1 kHz, 4 ch)</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- ACOUSTICS -->
+          <article class="system">
+            <div class="system__media">
+              <!-- TODO: photo of hydrophone array or Nautilus PCB -->
+              <img src="assets/img/system-acoustics.jpg" alt="Acoustics subsystem" />
+            </div>
+            <div class="system__body">
+              <div class="system__tag">ACOUSTICS</div>
+              <h3>Hydrophone Array</h3>
+              <p>
+                A four-element AS-1 hydrophone array feeds discrete JFET
+                preamps based on the Alex Rice/Zach Poff topology into our
+                in-house Nautilus PCB for synchronous 4-channel digitization.
+              </p>
+              <ul class="system__list">
+                <li>4× Aquarian AS-1 hydrophones</li>
+                <li>JFET preamplifier (2SK209)</li>
+                <li>PCM1865 quad-channel ADC over I²S</li>
+                <li>24 V phantom power rail</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       SYSTEM DIAGRAM
+       ============================================ -->
+    <section class="section diagram">
+      <div class="section__inner">
+        <div class="section__header section__header--center">
+          <div class="section__eyebrow">
+            <span class="label-num">04</span>
+            <span class="label-text">System Architecture</span>
+          </div>
+          <h2 class="section__title">From sensor to thrust.</h2>
+        </div>
+
+        <div class="diagram__frame">
+          <!-- TODO: drop your system block diagram here.
+             Recommended: export the data flow diagram you already have as
+             a high-res PNG or (better) SVG, then place at assets/img/system-diagram.svg -->
+          <img src="assets/img/system-diagram.svg" alt="Nautilus system block diagram" />
+        </div>
+        <p class="diagram__caption">
+          FIG. 02 — Nautilus signal &amp; data flow architecture
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+       TEAM
+       ============================================ -->
+    <section class="section team" id="team">
+      <div class="section__inner">
+        <div class="section__header">
+          <div class="section__eyebrow">
+            <span class="label-num">05</span>
+            <span class="label-text">The Team</span>
+          </div>
+          <h2 class="section__title">The people behind Nautilus.</h2>
+        </div>
+
+        <!-- MEMBERS — 7 leads, one per discipline -->
+        <div class="team__grid">
+
+          <!-- TODO: each <article> has a per-person headshot filename in
+             assets/img/team/. Drop the matching .png file in to populate.
+             Lead roles below are placeholders — adjust to match each
+             person's actual focus. -->
+
+          <article class="member">
+            <div class="member__photo">
+              <img src="assets/img/team/oscar_headshot.png" alt="Oscar M. Guerra" style="object-position: center 0%;" />
+            </div>
+            <div class="member__info">
+              <h4 class="member__name">Oscar M. Guerra</h4>
+              <div class="member__role">[Lead Role]</div>
+              <div class="member__major">Mechanical Engineering</div>
+              <p class="member__bio">[Short bio.]</p>
+              <div class="member__links">
+                <a href="#" aria-label="LinkedIn">in</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="member">
+            <div class="member__photo">
+              <img src="assets/img/team/brendan_headshot.png" alt="Brendan Kelly" style="object-position: center 0%;" />
+            </div>
+            <div class="member__info">
+              <h4 class="member__name">Brendan Kelly</h4>
+              <div class="member__role">[Lead Role]</div>
+              <div class="member__major">Electrical Engineering</div>
+              <p class="member__bio">[Short bio.]</p>
+              <div class="member__links">
+                <a href="#" aria-label="LinkedIn">in</a>
+                <a href="#" aria-label="GitHub">gh</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="member">
+            <div class="member__photo">
+              <img src="assets/img/team/tye_headshot.png" alt="Tye Muñoz Andrada" />
+            </div>
+            <div class="member__info">
+              <h4 class="member__name">Tye Muñoz Andrada</h4>
+              <div class="member__role">[Lead Role]</div>
+              <div class="member__major">Mechanical &amp; Aerospace Engineering</div>
+              <p class="member__bio">[Short bio.]</p>
+              <div class="member__links">
+                <a href="#" aria-label="LinkedIn">in</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="member">
+            <div class="member__photo">
+              <img src="assets/img/team/sam_headshot.png" alt="Samuel Myers" style="object-position: center 0%;" />
+            </div>
+            <div class="member__info">
+              <h4 class="member__name">Samuel Myers</h4>
+              <div class="member__role">[Lead Role]</div>
+              <div class="member__major">Mechanical &amp; Aerospace Engineering</div>
+              <p class="member__bio">[Short bio.]</p>
+              <div class="member__links">
+                <a href="#" aria-label="LinkedIn">in</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="member">
+            <div class="member__photo">
+              <img src="assets/img/team/zach_headshot.png" alt="Zach Nieto" />
+            </div>
+            <div class="member__info">
+              <h4 class="member__name">Zach Nieto</h4>
+              <div class="member__role">[Lead Role]</div>
+              <div class="member__major">Mechanical &amp; Aerospace Engineering</div>
+              <p class="member__bio">[Short bio.]</p>
+              <div class="member__links">
+                <a href="#" aria-label="LinkedIn">in</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="member">
+            <div class="member__photo">
+              <img src="assets/img/team/lucas_headshot.png" alt="Lucas Samaniego" />
+            </div>
+            <div class="member__info">
+              <h4 class="member__name">Lucas Samaniego</h4>
+              <div class="member__role">[Lead Role]</div>
+              <div class="member__major">Electrical & Computer Engineering</div>
+              <p class="member__bio">[Short bio.]</p>
+              <div class="member__links">
+                <a href="#" aria-label="LinkedIn">in</a>
+                <a href="#" aria-label="GitHub">gh</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="member">
+            <div class="member__photo">
+              <img src="assets/img/team/ethan_headshot.png" alt="Ethan Sarles" />
+            </div>
+            <div class="member__info">
+              <h4 class="member__name">Ethan Sarles</h4>
+              <div class="member__role">[Lead Role]</div>
+              <div class="member__major">Electronics &amp; Computer Engineering Technology</div>
+              <p class="member__bio">Ethan is a bitch ass bitch boy from fucking ECET, Fuck ECET.</p>
+              <div class="member__links">
+                <a href="#" aria-label="LinkedIn">in</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- ADVISORS -->
+        <h3 class="subsection__title">Faculty Advisors</h3>
+        <div class="advisors">
+          <div class="advisor">
+            <div class="advisor__name">Dr. Paul Furth</div>
+            <div class="advisor__title">Professor · Electronics &amp; Computer Engineering Technology Program
+              Coordinator</div>
+          </div>
+          <div class="advisor">
+            <div class="advisor__name">Dr. Wei Tang</div>
+            <div class="advisor__title">Professor · Klipsch School of Electrical &amp; Computer Engineering</div>
+          </div>
+          <div class="advisor">
+            <div class="advisor__name">Dr. Mario Renteria-Pinon</div>
+            <div class="advisor__title">Assistant Professor · Klipsch School of Electrical &amp; Computer Engineering
+            </div>
+          </div>
+          <div class="advisor">
+            <div class="advisor__name">Dr. Abdessattar Abdelkefi</div>
+            <div class="advisor__title">Professor · Mechanical &amp; Aerospace Engineering</div>
+          </div>
+        </div>
+        <div class="advisor">
+          <div class="advisor__name">Brooke Montgomery</div>
+          <div class="advisor__title">Professor of Practice · NMSU</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+       SPONSORS
+       ============================================ -->
+    <section class="section sponsors" id="sponsors">
+      <div class="section__inner">
+        <div class="section__header">
+          <div class="section__eyebrow">
+            <span class="label-num">06</span>
+            <span class="label-text">Sponsors &amp; Partners</span>
+          </div>
+          <h2 class="section__title">
+            Nautilus is made possible by our sponsors.
+          </h2>
+          <p class="section__lede">
+            Interested in supporting the next generation of underwater
+            robotics engineers?
+            <a href="#contact" class="link-inline">Get in touch →</a>
+          </p>
+        </div>
+
+        <div class="sponsors__row">
+          <!-- TODO: replace each sponsor card's text with their logo when received.
+             Format for a logo card:
+               <div class="sponsor"><img src="assets/img/sponsors/sandia.png" alt="Sandia National Laboratories" /></div>
+        -->
+          <div class="sponsor sponsor--text"><span>Sandia National Laboratories</span></div>
+          <div class="sponsor sponsor--text"><span>AG Supply Inc.</span></div>
+          <div class="sponsor sponsor--text"><span>Crouch Sales</span></div>
+          <div class="sponsor sponsor--text"><span>Nortek Group</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       MEDIA / GALLERY
+       ============================================ -->
+    <section class="section media" id="media">
+      <div class="section__inner">
+        <div class="section__header">
+          <div class="section__eyebrow">
+            <span class="label-num">07</span>
+            <span class="label-text">Media</span>
+          </div>
+          <h2 class="section__title">Build log.</h2>
+        </div>
+
+        <!-- FEATURED VIDEO -->
+        <div class="media__featured">
+          <!-- TODO: replace VIDEO_ID with your YouTube video ID
+             e.g., https://www.youtube.com/embed/dQw4w9WgXcQ -->
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Kraken Submersibles — Nautilus reveal"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+          <div class="media__caption">
+            <span>FILM. 01</span>
+            <span>NAUTILUS REVEAL · 2026</span>
+          </div>
+        </div>
+
+        <!-- IMAGE GALLERY -->
+        <div class="gallery">
+          <!-- TODO: drop photos into assets/img/gallery/ and update src.
+             The grid uses an asymmetric layout — the order matters. -->
+          <a class="gallery__item gallery__item--lg" href="assets/img/gallery/01.jpg">
+            <img src="assets/img/gallery/01.jpg" alt="" />
+            <span class="gallery__caption">PCB bring-up</span>
+          </a>
+          <a class="gallery__item" href="assets/img/gallery/02.jpg">
+            <img src="assets/img/gallery/02.jpg" alt="" />
+            <span class="gallery__caption">Pool test</span>
+          </a>
+          <a class="gallery__item" href="assets/img/gallery/03.jpg">
+            <img src="assets/img/gallery/03.jpg" alt="" />
+            <span class="gallery__caption">Frame assembly</span>
+          </a>
+          <a class="gallery__item gallery__item--tall" href="assets/img/gallery/04.jpg">
+            <img src="assets/img/gallery/04.jpg" alt="" />
+            <span class="gallery__caption">Hydrophone array</span>
+          </a>
+          <a class="gallery__item" href="assets/img/gallery/05.jpg">
+            <img src="assets/img/gallery/05.jpg" alt="" />
+            <span class="gallery__caption">Wiring harness</span>
+          </a>
+          <a class="gallery__item" href="assets/img/gallery/06.jpg">
+            <img src="assets/img/gallery/06.jpg" alt="" />
+            <span class="gallery__caption">Lab work</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       DELIVERABLES (TDR, video, etc.)
+       ============================================ -->
+    <section class="section deliverables">
+      <div class="section__inner">
+        <div class="section__header">
+          <div class="section__eyebrow">
+            <span class="label-num">08</span>
+            <span class="label-text">Competition Deliverables</span>
+          </div>
+          <h2 class="section__title">Documentation.</h2>
+        </div>
+
+        <div class="deliverables__grid">
+          <!-- TODO: replace href with actual PDF/video links once posted -->
+          <a class="deliverable" href="assets/docs/TDR-2026.pdf" target="_blank" rel="noopener">
+            <div class="deliverable__icon">PDF</div>
+            <div class="deliverable__body">
+              <h3>Technical Design Report</h3>
+              <p>RoboSub 2026 — Nautilus Generation I</p>
+            </div>
+            <div class="deliverable__arrow">→</div>
+          </a>
+
+          <span class="deliverable deliverable--soon">
+            <div class="deliverable__icon">▶</div>
+            <div class="deliverable__body">
+              <h3>Prequalification Video</h3>
+              <p>Autonomous demonstration run</p>
+            </div>
+            <div class="deliverable__arrow deliverable__soon-tag">Coming Soon</div>
+          </span>
+
+          <a class="deliverable" href="https://github.com/" target="_blank" rel="noopener">
+            <div class="deliverable__icon">{ }</div>
+            <div class="deliverable__body">
+              <h3>Open-Source Stack</h3>
+              <p>Schematics, firmware, and ROS packages</p>
+            </div>
+            <div class="deliverable__arrow">→</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       CONTACT / FOOTER
+       ============================================ -->
+    <footer class="footer" id="contact">
+      <div class="section__inner footer__grid">
+
+        <div class="footer__left">
+          <div class="footer__brand">
+            <img src="assets/img/logo.png" alt="Kraken Submersibles" />
+            <div>
+              <div class="footer__brand-main">KRAKEN SUBMERSIBLES</div>
+              <div class="footer__brand-sub">New Mexico State University</div>
+            </div>
+          </div>
+          <p class="footer__tag">
+            Designing and building autonomous underwater vehicles<br />
+            from the high desert.
+          </p>
+        </div>
+
+        <div class="footer__col">
+          <h4>Get in Touch</h4>
+          <ul>
+            <!-- TODO: update with team email -->
+            <li><a href="mailto:kraken@nmsu.edu">kraken@nmsu.edu</a></li>
+            <li>Goddard Hall 136</li>
+            <li>NMSU · Las Cruces, NM</li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Follow</h4>
+          <ul class="footer__soon-list">
+            <!-- TODO: when social accounts are live, replace each <span> with:
+               <a href="https://instagram.com/..." target="_blank" rel="noopener">Instagram</a> -->
+            <li><span>Instagram</span><em>Coming Soon</em></li>
+            <li><span>LinkedIn</span><em>Coming Soon</em></li>
+            <li><span>GitHub</span><em>Coming Soon</em></li>
+            <li><span>YouTube</span><em>Coming Soon</em></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Site</h4>
+          <ul>
+            <li><a href="#vehicle">Vehicle</a></li>
+            <li><a href="#systems">Systems</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#sponsors">Sponsors</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="kraken-year">2026</span> Kraken Submersibles · NMSU</span>
+        <span class="footer__bottom-meta">ROBOSUB 2026 · NAUTILUS · GEN I</span>
+      </div>
+    </footer>
+
+  </div>
+  <!-- ===== END .kraken container ===== -->
+
+  <script>
+    // Scoped to the Kraken page — uses unique IDs so it doesn't fight any other JS on your site.
+    (function () {
+      const nav = document.getElementById('kraken-nav');
+      if (!nav) return;
+
+      // Nav scroll state
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) nav.classList.add('nav--scrolled');
+        else nav.classList.remove('nav--scrolled');
+      }, { passive: true });
+
+      // Mobile menu
+      const menuBtn = document.getElementById('kraken-menuBtn');
+      menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('nav--open');
+        menuBtn.classList.toggle('is-open');
+      });
+
+      // Smooth scroll + close mobile menu on link click
+      nav.querySelectorAll('.nav__links a').forEach(a => {
+        a.addEventListener('click', () => {
+          nav.classList.remove('nav--open');
+          menuBtn.classList.remove('is-open');
+        });
+      });
+
+      // Year auto-update
+      const yearEl = document.getElementById('kraken-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Reveal-on-scroll for sections
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.kraken .section, .kraken .hero__content > *').forEach(el => io.observe(el));
+    })();
+  </script>
+
+</body>
+
+</html>

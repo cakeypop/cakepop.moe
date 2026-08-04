@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    div.gallery {
+        margin: 5px;
+        border: 1px solid #ccc;
+        float: left;
+        width: 180px;
+    }
+
+    div.gallery:hover {
+        border: 1px solid #777;
+    }
+
+    div.gallery img {
+        width: 100%;
+        height: auto;
+    }
+
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Media</title>
+</head>
+
+<body style="background-color: #95a7b1;">
+    <h1 style="color:rgb(0, 0, 0);background-color: #566777;">Lucas Samaniego - Portfolio</h1>
+    <hr>
+    <p>Google Docs Resume <a
+            href="https://docs.google.com/document/d/1PscZAtftNYfNi3xHErcwz5fz8cU_lHbwwfuhnruo1dQ/edit?usp=sharing"
+            target="_blank" rel="noopener noreferrer">link</a>.</p>
+    <hr>
+    <h2>Rubik's Cube Simulation Project</h2>
+    <p>
+        Through the Electrical & Computer Engineering curriculum at NMSU, there is an Embedded Systems course (EE 112)
+        which features a final project in Arduino C++ which allows freedom of design to the
+        student as long as it implements the topics learned throughout the course. For my project, I created a
+        simulation of a Rubik’s Cube.<br><br>
+
+        I wrote a program that utilizes an LCD Shield integrated with an Arduino Uno to display a Rubik’s cube
+        graphically in real time as it is being manipulated by moves entered through the Arduino GUI.
+        The Rubik’s cube is shown both in a dimetric perspective, as well as in an unfolded 2D representation on the LCD
+        screen.
+        There is also ASCII imagery representing the unfolded 2D map as output to the Serial monitor.
+        The simulation of the Rubik’s cube was achieved through the use of arrays corresponding to each of the
+        fifty-four spots which can be manipulated, but must always remain consistent with the behavior of a real-life
+        model.
+        (e.g. the center square of each face never changes, and there are always nine of each of the six colors)
+        The moveset, or possible turns of a cube, can be simplified to six types of turns, where every other type of
+        manipulation can be defined as a combination of those six turns. Those six turns are:<br>
+    <ul>
+        <li>Front - The closest third of the cube is turned ClockWise (CW)</li>
+        <li>Right - The right third of the cube is turned CW</li>
+        <li>Up - The top third of the cube is turned CW</li>
+        <li>Left - The left third of the cube is turned CW</li>
+        <li>Back - The back third of the cube is turned CW</li>
+        <li>Down - The bottom third of the cube is turned CW</li>
+    </ul>
+
+    Through the use of OSS and Thin-Film Transistor(TFT) libraries available online, I utilized my own 240x320 pixel-art
+    of what I envisioned the graphical display should look like to map out a series of programmed functions that draw
+    the lines and fill in the shapes resembling a cube.
+    Then I called those functions to update the graphical display as the virtual cube is manipulated. Rigorously
+    edge-testing and debugging until I couldn’t make it fail.
+    There is an extensive log of the process <a
+        href="https://drive.google.com/file/d/1P4vyb9DDBw4XYmBrYnjBJs8IGeDG-TZ2/view?usp=sharing" target="_blank"
+        rel="noopener noreferrer">here</a>. (PDF hosted on Google Drive)
+
+    </p>
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/w5rjvJRdKtY?start=13"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    <p>The above video is the demo showcasing my project that simulates a Rubik's Cube opn an Arduino Uno with a TFT LCD
+        Shield. In the video, I send a series of inputs(turns) through the Arduino GUI, that manipulate the cube
+        from a solved state to the pattern matching the physical cube on the webcam. The pattern gives the illusion
+        of a cube inside of a cube inside of a cube, and I used it because it's my favorite pattern that can be made on
+        a Rubik's cube.
+        As the inputs are sent to the Arduino Uno, the LCD screen updates both the unfolded 2D and 3D dimetric map of
+        the virtual cube.
+    </p>
+    <p>
+        <a href="https://github.com/cakeypop/Rubik-s-Cube-Simulator" target="_blank" rel="noopener noreferrer">github
+            repository with Arduino C++ .ino file</a>
+    </p>
+
+    <div class="gallery">
+        <a target="_blank" href="images/2D cube diagram finished.jpg">
+            <img src="images/2D cube diagram finished.jpg" alt="2D display" width="600" height="400">
+        </a>
+        <div class="desc">2D display mapped to LCD Shield</div>
+    </div>
+
+    <div class="gallery">
+        <a target="_blank" href="images/3D diagram.jpg">
+            <img src="images/3D diagram.jpg" alt="3D display" width="600" height="400">
+        </a>
+        <div class="desc">3D display mapped to LCD Shield</div>
+    </div>
+
+    <div class="gallery">
+        <a target="_blank" href="images/2D and 3D diagram.jpg">
+            <img src="images/2D and 3D diagram.jpg" alt="2D/3D completed" width="600" height="400">
+        </a>
+        <div class="desc">2D and 3D mapped to LCD Shield</div>
+    </div>
+
+    <div class="gallery">
+        <a target="_blank" href="images/Demo image.jpg">
+            <img src="images/Demo image.jpg" alt="Demo image" width="600" height="400">
+        </a>
+        <div class="desc">demo physical vs. virtual</div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <hr>
+
+
+    <h2>Dencor - Project Manager</h2>
+    <p>
+        As the project manager for a small tech company working with Energy Management Systems (EMS), I facilitated several
+        projects to completion, one of them being the installation of an EMS at the <a href="https://www.kongcompany.com/" target="_blank"
+        rel="noopener noreferrer">Kong Headquarters</a> (a dog toy manufacturer), in Golden, CO. This project included:
+        <ul>
+            <li>Planning: EMS system is custom configured to meet client needs, and assembled in our warehouse.</li>
+            <li>Quoting: Based on the final configuration, I create a quote of time and materials and present it to the client.</li>
+            <li>Install:  </li>
+            <li>Point-Of-Contact: I work closely with their building manager, and act as the point of contact, extending after installation</li>
+        
+        </ul>
+        
+
+        
+    </p>
+    <img src="images/2-edited.jpg" alt="EMS enclosure installed not wired" width="50%" height="50%">
+    <p>EMS enclosure installed but not wired up</p>
+    <hr>
+    <img src="images/3-edited.jpg" alt="EMS enclosure and extra enclosure" width="50%" height="50%">
+    <p>EMS enclosure and other enclosure for more controls</p>
+    <hr>
+    <img src="images/4-edited.jpg" alt="" width="50%" height="50%">
+    <p>EMS Enclosure wired into facility</p>
+    <hr>
+    <img src="images/5.jpg" alt="" width="50%" height="50%">
+    <p>extra enclosure wired</p>
+    <hr>
+    <img src="images/6.jpg" alt="" width="50%" height="50%">
+    <p>egauge monitoring system</p>
+    <hr>
+    <img src="images/7 - CT install.jpg" alt="" width="50%" height="50%">
+    <p>CT's installed for monitoring amperes onto facility mains</p>
+    <hr>
+    <img src="images/8 - kong electrical with solar.jpg" alt="" width="50%" height="50%">
+    <p>facility electrical, including solar</p>
+    <hr>
+    <img src="images/9 - CT  calibration.jpg" alt="" width="50%" height="50%">
+    <p>CT calibration</p>
+    <hr>
+    <img src="images/10 - rtu tstat wiring.jpg" alt="" width="50%" height="50%">
+    <p>Roof Top Unit (RTU) tstat wiring</p>
+    <hr>
+    <img src="images/11 - kong RTUs.jpg" alt="" width="50%" height="50%">
+    <p>RTU's on roof of facility</p>
+    <hr>
+    <img src="images/12 - Kong Wiring Layout.png" alt="" width="50%" height="50%">
+    <p>Wiring layout for monitoring/automating AC for facility</p>
+    <hr>
+    <img src="images/13 - Kong Sensor Layout With Mapping.png" alt="" width="50%" height="50%">
+    <p>Temperature Sensors mapping diagram</p>
+    <hr>
+    <img src="images/14 - backend software.PNG" alt="" width="50%" height="50%">
+    <p>A view of the monitoring software backend</p>
+    <hr>
+    <img src="images/15 - (other) example of monitoring graphs.PNG" alt="" width="50%" height="50%">
+    <p>an older webpage showing energy use and other sensors</p>
+    <hr>
+    <img src="images/16 - Dispenser Monitoring Updgrade Diagram.png" alt="" width="50%" height="50%">
+    <p>diagram explaining upgrade project across 50 locations</p>
+    <hr>
+    <img src="images/17 - more backend.PNG" alt="" width="50%" height="50%">
+    <p>expanded backend monitoring software</p>
+    <hr>
+    <img src="images/18 - LAN webpage monitoring.PNG" alt="" width="50%" height="50%">
+    <p>Updated UI for webpage client (LAN)</p>
+    <hr>
+    <img src="images/19.PNG" alt="" width="50%" height="50%">
+    <p>expanded backend monitoring data</p>
+    <hr>
+    <img src="images/20.PNG" alt="" width="50%" height="50%">
+    <p>more energy monitoring UI</p>
+    <hr>
+    <img src="images/21 - Residential System Diagram for Reference.png" alt="" width="50%" height="50%">
+    <p>Reference diagram for residential installs</p>
+    <hr>
+
+    <h2>Other</h2>
+    <p>5k (3.1 mile) run <a
+            href="https://docs.google.com/spreadsheets/d/1OyZWtFFBcjbpT9pBkKR9jknppp30H6-xkoSFfJfzxOQ/edit?usp=sharing"
+            target="_blank" rel="noopener noreferrer">log</a></p>
+    <p>I have two dogs, both border collies<br><br> Yuki</p>
+    <img src="images/yuki_bordercollie.jpg" alt="yuki border collie" width="50%" height="50%">
+    <p>and Rip</p>
+    <img src="images/rip_bat.jpg" alt="rip border collie" width="50%" height="50%">
+
+
+    <h2>Scratch Self-Learning Exercise "Cake Calamity"</h2>
+    <p>
+        While on break from school, I continued to further my education and skills. I took part in Harvard's self-paced
+        <a href="https://www.edx.org/learn/computer-science/harvard-university-cs50-s-introduction-to-computer-science"
+            target="_blank" rel="noopener noreferrer">CS50x Course</a>. One of the modules in this course is
+        to program a game in Scratch, which was an excellent experience being exposed to using this programming
+        environment, and I especially hope more young students will have access to environments like this in the
+        future.<br><br>
+        My game features rule-based behavior displayed in enemies that elevates the complexity-feel of what would
+        otherwise be a
+        very simple game experience. This self-paced course, as well as the eclectic collection of other projects in
+        this course,
+        helped me to strengthen my programming skills to compliment my ECE degree. Before this class and project, I
+        wasn't even aware
+        of Scratch, so this experience broadened my horizons.
+    </p>
+    <img src="images/cake_calamity_inside.png" alt="cake calamity inside" width="75%" height="75%">
+    <p><a href="https://scratch.mit.edu/projects/787994230" target="_blank" rel="noopener noreferrer">link</a> to
+        playable game</p>
+
+    <hr>
+
+    <h2>Planet Labs UHF Antenna work</h2>
+    <p>
+        From January 2020 through to the end of 2024, I was an on-call UHF Technician for Planet Labs PBC, A San
+        Francisco-based
+        satellite imaging company. NMSU's now demolished Thomas & Brown building hosted one of their Ultra-High
+        Frequency (UHF) ground stations. If any issues arose, I was called to troubleshoot the antenna,
+        make repairs, or replace parts, while coordinating with a Ground Station Engineer at their HQ.
+    </p>
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/F-9jElBxB1w"
+        title="YouTube video player" frameborder="0"
+        aFllow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+
+    <p>video showing the testing of full range of motion on an azimuth motor before physical replacement on the antenna
+    </p>
+    <hr>
+    <br>
+    <img src="images/UHF antenna.jpg" alt="UHF antenna" width="75%" height="75%">
+    <p>UHF Antenna after replacing azimuth/elevation motor, and performing calibration</p>
+
+    <hr>
+
+
+    <h2>3D Printing</h2>
+
+    <p>
+        Several years ago, I took a course which allowed me to become proficient in SolidWorks CAD as well as gain
+        experience with drafting 2D blueprints alongside 3D models. As a result, I
+        eventually acquired my own 3D printer, an Ender 3 v2. Since getting it in 2021, I have spent much of
+        my free time creating models in SolidWorks, SketchUp, and Autodesk CAD, and utilizing the combination of them as
+        a resource for both problem solving and entertainment purposes.<br>
+        Much of my time was spent learning to work with OSS such as Cura Slicer to dial in a printer with both my own
+        personal models as well as models posted online to sites like Thingiverse.<br><br>
+        The following is an example of a part I modeled and printed for a Biomedical lab that commissioned me for a
+        hex-wrench. The requirements were that it needed to be small enough to be operable within the crevices of
+        equipment, as well as designed in a way that would allow it to be sanitized to cleanroom standards.
+        3D printing <a
+            href="https://docs.google.com/document/d/17ZUEpyxQPvNFUxvwZSrAVsOXOflRIBACSRWUdwQUe-Y/edit?usp=sharing"
+            target="_blank" rel="noopener noreferrer">log [incomplete]</a>.</p>
+
+    <h3>Wrench 3D print</h3>
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MRfj_hTS5i0"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    <br>
+    <img src="images/wrench.jpg" alt="wrench.jpg" width="40%" height="40%">
+    <img src="images/wrench with nut.jpg" alt="wrench with nut.jpg" width="40%" height="40%">
+    <br>
+    <p>wrench modeled and printed for clean-room use. Made with SolidWorks <br>
+        printed using Ender 3 v2 printer with PLA</p>
+    <hr>
+</body>
+
+</html>
