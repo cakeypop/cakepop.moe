@@ -19,7 +19,9 @@
     rel="stylesheet" />
 
   <!-- Scoped Kraken stylesheet — only applies inside .kraken container -->
-  <link rel="stylesheet" href="kraken.css" />
+  <!-- ?v= is a cache-buster: bump this number any time kraken.css changes
+       and the live server/CDN is still serving a stale cached copy -->
+  <link rel="stylesheet" href="kraken.css?v=2" />
 </head>
 
 <body>
