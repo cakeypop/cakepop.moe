@@ -8,8 +8,7 @@
   <meta name="description"
     content="New Mexico State University's autonomous underwater vehicle team, competing in RoboSub 2026." />
 
-  <!-- TODO: replace href with your actual favicon (export from your logo) -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
 
   <!-- Fonts: Montserrat (Gotham-alike, SIL OFL) + JetBrains Mono (Apache 2.0) -->
   <!-- Both fonts are free for unlimited commercial use without attribution. -->
@@ -180,19 +179,18 @@
         </div>
 
         <div class="vehicle__hero">
-          <div class="vehicle__hero">
-            <video autoplay muted loop playsinline poster="assets/img/vehicle-hero.jpg">
-              <source src="assets/video/nautilus-turntable.mp4" type="video/mp4">
-            </video>
-            <div class="vehicle__hero-caption">
-              <span>FIG. 01</span>
-              <span>NAUTILUS · GEN I · 2026</span>
-            </div>
+          <video autoplay muted loop playsinline poster="assets/img/vehicle-hero.jpg">
+            <source src="assets/video/nautilus-turntable.mp4" type="video/mp4">
+          </video>
+          <div class="vehicle__hero-caption">
+            <span>FIG. 01</span>
+            <span>NAUTILUS · GEN I · 2026</span>
           </div>
+        </div>
 
-          <div class="vehicle__specs">
-            <h3 class="specs__title">Vehicle Specifications</h3>
-            <div class="specs__grid">
+        <div class="vehicle__specs">
+          <h3 class="specs__title">Vehicle Specifications</h3>
+          <div class="specs__grid">
               <!-- TODO: confirm/edit specs as the design finalizes -->
               <div class="spec">
                 <div class="spec__key">Frame</div>
@@ -236,7 +234,7 @@
               </div>
               <div class="spec">
                 <div class="spec__key">Vision</div>
-                <div class="spec__val">ZED Mini stereo + Waveshare IR-Cut</div>
+                <div class="spec__val">ZED Mini stereo + Waveshare IR</div>
               </div>
               <div class="spec">
                 <div class="spec__key">Endurance</div>
@@ -259,8 +257,7 @@
           </div>
           <h2 class="section__title">Engineered, end-to-end.</h2>
           <p class="section__lede">
-            Every layer of the Nautilus, including machined aluminum, computer vision inference, 
-            and a custom designed circuit, are all designed and integrated by our team.
+            Every layer of the Nautilus, including machined aluminum, computer vision inference, and a custom designed circuit, are all designed and integrated by our team.
           </p>
         </div>
 
@@ -270,21 +267,21 @@
           <article class="system">
             <div class="system__media">
               <!-- TODO: photo or CAD render of frame / hull -->
-              <img src="assets\img\nautilus_frame_drawing.png" alt="Mechanical subsystem" />
+              <img src="assets/img/nautilus_frame_drawing.png" alt="Mechanical subsystem" />
             </div>
             <div class="system__body">
               <div class="system__tag">MECHANICAL</div>
               <h3>Frame &amp; Hull</h3>
               <p>
-                Made with Aluminum T-slots and an HDPE top plate, dual 6" Acrylic
-                housings are home to the electronics & 4S LiPo batteries. Designed for
+                An open aluminum-extrusion chassis houses the pressure vessel,
+                electronics bays, thrusters, and payload mounts. Designed for
                 neutral buoyancy and serviceability between competition runs.
               </p>
               <ul class="system__list">
-                <li>Custom aluminum T-Slot frame</li>
+                <li>Custom aluminum frame</li>
                 <li>Acrylic / aluminum pressure vessel</li>
-                <li>Modular frame, electronics, &amp; battery enclosures</li>
-                <li>Integrated grabber, torpedo launchers, &amp; dropper</li>
+                <li>Modular electronics enclosures</li>
+                <li>Integrated grasper &amp; torpedo launchers</li>
               </ul>
             </div>
           </article>
@@ -293,7 +290,7 @@
           <article class="system">
             <div class="system__media">
               <!-- TODO: photo of PCB, wiring, or PDB -->
-              <img src="assets\img\nautilus_power_diagram.png" alt="Electrical subsystem" />
+              <img src="assets/img/nautilus_power_diagram.png" alt="Electrical subsystem" />
             </div>
             <div class="system__body">
               <div class="system__tag">ELECTRICAL</div>
@@ -305,7 +302,7 @@
               </p>
               <ul class="system__list">
                 <li>Dual 4S LiPo · 236 Wh usable</li>
-                <li>4-ch Hydrophone JFET Differential Preamp + ADC</li>
+                <li>Nautilus PCB: 4-ch hydrophone amp + PCM1865 ADC</li>
                 <li>Blue Sea ML-RBS main relay + fuse protection</li>
                 <li>Phantom-powered AS-1 hydrophone array</li>
               </ul>
@@ -316,7 +313,7 @@
           <article class="system">
             <div class="system__media">
               <!-- TODO: screenshot of CV stack, ROS graph, or telemetry UI -->
-              <img src="assets/img/system-software.jpg" alt="Software subsystem" />
+              <img src="assets/img/onboard-video.png" alt="Software subsystem" />
             </div>
             <div class="system__body">
               <div class="system__tag">SOFTWARE &amp; AUTONOMY</div>
@@ -339,7 +336,7 @@
           <article class="system">
             <div class="system__media">
               <!-- TODO: photo of hydrophone array or Nautilus PCB -->
-              <img src="assets/img/system-acoustics.jpg" alt="Acoustics subsystem" />
+              <img src="assets/img/nautilus_hydrophone_spectrogram.png" alt="Acoustics subsystem" />
             </div>
             <div class="system__body">
               <div class="system__tag">ACOUSTICS</div>
@@ -397,7 +394,7 @@
             <span class="label-num">05</span>
             <span class="label-text">The Team</span>
           </div>
-          <h2 class="section__title">The people behind Nautilus.</h2>
+          <h2 class="section__title">The team behind Nautilus.</h2>
         </div>
 
         <!-- MEMBERS — 7 leads, one per discipline -->
@@ -414,9 +411,9 @@
             </div>
             <div class="member__info">
               <h4 class="member__name">Oscar M. Guerra</h4>
-              <div class="member__role">[Lead Role]</div>
+              <div class="member__role">[CAD Design Lead]</div>
               <div class="member__major">Mechanical Engineering</div>
-              <p class="member__bio">[Short bio.]</p>
+              <p class="member__bio">Oscar is a graduate student focused on manufacturing, nondestructive evaluation, and CAD design. His cat Marci is very cute.</p>
               <div class="member__links">
                 <a href="#" aria-label="LinkedIn">in</a>
               </div>
@@ -429,9 +426,9 @@
             </div>
             <div class="member__info">
               <h4 class="member__name">Brendan Kelly</h4>
-              <div class="member__role">[Lead Role]</div>
+              <div class="member__role">[Power Design Lead]</div>
               <div class="member__major">Electrical Engineering</div>
-              <p class="member__bio">[Short bio.]</p>
+              <p class="member__bio">Member has not provided an "About me" snippet, they were notified 5/30/2026</p>
               <div class="member__links">
                 <a href="#" aria-label="LinkedIn">in</a>
                 <a href="#" aria-label="GitHub">gh</a>
@@ -445,9 +442,9 @@
             </div>
             <div class="member__info">
               <h4 class="member__name">Tye Muñoz Andrada</h4>
-              <div class="member__role">[Lead Role]</div>
+              <div class="member__role">[Fabrication &amp; Assembly Lead]</div>
               <div class="member__major">Mechanical &amp; Aerospace Engineering</div>
-              <p class="member__bio">[Short bio.]</p>
+              <p class="member__bio">Member has not provided an "About me" snippet, they were notified 5/30/2026</p>
               <div class="member__links">
                 <a href="#" aria-label="LinkedIn">in</a>
               </div>
@@ -460,9 +457,9 @@
             </div>
             <div class="member__info">
               <h4 class="member__name">Samuel Myers</h4>
-              <div class="member__role">[Lead Role]</div>
+              <div class="member__role">[Structural Design Lead]</div>
               <div class="member__major">Mechanical &amp; Aerospace Engineering</div>
-              <p class="member__bio">[Short bio.]</p>
+              <p class="member__bio">Member has not provided an "About me" snippet, they were notified 5/30/2026</p>
               <div class="member__links">
                 <a href="#" aria-label="LinkedIn">in</a>
               </div>
@@ -475,9 +472,9 @@
             </div>
             <div class="member__info">
               <h4 class="member__name">Zach Nieto</h4>
-              <div class="member__role">[Lead Role]</div>
+              <div class="member__role">[Mechanisms &amp; Testing Lead]</div>
               <div class="member__major">Mechanical &amp; Aerospace Engineering</div>
-              <p class="member__bio">[Short bio.]</p>
+              <p class="member__bio">Member has not provided an "About me" snippet, they were notified 5/30/2026</p>
               <div class="member__links">
                 <a href="#" aria-label="LinkedIn">in</a>
               </div>
@@ -490,9 +487,10 @@
             </div>
             <div class="member__info">
               <h4 class="member__name">Lucas Samaniego</h4>
-              <div class="member__role">[Lead Role]</div>
+              <div class="member__role">[Embedded Systems &amp; Autonomy Lead]</div>
               <div class="member__major">Electrical & Computer Engineering</div>
-              <p class="member__bio">[Short bio.]</p>
+              <p class="member__bio">Lucas graduates December 2026 with a concentration in Microelectronics. Outside of school, they play drums, 
+                video games, dance, and goes on runs with their two border-collies, Yuki & Riptide, in an attempt to tire them out.</p>
               <div class="member__links">
                 <a href="#" aria-label="LinkedIn">in</a>
                 <a href="#" aria-label="GitHub">gh</a>
@@ -506,9 +504,9 @@
             </div>
             <div class="member__info">
               <h4 class="member__name">Ethan Sarles</h4>
-              <div class="member__role">[Lead Role]</div>
+              <div class="member__role">[Electronics Test &amp; Integration Lead]</div>
               <div class="member__major">Electronics &amp; Computer Engineering Technology</div>
-              <p class="member__bio">Ethan is a bitch ass bitch boy from fucking ECET, Fuck ECET.</p>
+              <p class="member__bio">Member has not provided an "About me" snippet, they were notified 5/30/2026</p>
               <div class="member__links">
                 <a href="#" aria-label="LinkedIn">in</a>
               </div>
@@ -568,14 +566,17 @@
         </div>
 
         <div class="sponsors__row">
-          <!-- TODO: replace each sponsor card's text with their logo when received.
-             Format for a logo card:
-               <div class="sponsor"><img src="assets/img/sponsors/sandia.png" alt="Sandia National Laboratories" /></div>
-        -->
-          <div class="sponsor sponsor--text"><span>Sandia National Laboratories</span></div>
+          <a class="sponsor sponsor--dark" href="https://www.sandia.gov/" target="_blank" rel="noopener">
+            <img src="assets/img/sponsors/sandia-logo-stacked-white-240x124.png" alt="Sandia National Laboratories" />
+          </a>
+          <!-- TODO: add link once available -->
           <div class="sponsor sponsor--text"><span>AG Supply Inc.</span></div>
-          <div class="sponsor sponsor--text"><span>Crouch Sales</span></div>
-          <div class="sponsor sponsor--text"><span>Nortek Group</span></div>
+          <a class="sponsor" href="https://www.crouchsales.com/" target="_blank" rel="noopener">
+            <img src="assets/img/sponsors/crouch-logo.png" alt="Crouch Sales" />
+          </a>
+          <a class="sponsor" href="https://www.nortekgroup.com/" target="_blank" rel="noopener">
+            <img src="assets/img/sponsors/nortek-logo.png" alt="Nortek Group" />
+          </a>
         </div>
       </div>
     </section>
