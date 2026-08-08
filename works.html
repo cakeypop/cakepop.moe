@@ -22,6 +22,79 @@
         padding: 15px;
         text-align: center;
     }
+
+    .page-wrap {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .diagram-row {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        margin: 16px 0;
+        position: relative;
+    }
+
+    .diagram-item {
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+        transition: opacity 0.3s ease;
+    }
+
+    .diagram-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 4px;
+        cursor: zoom-in;
+    }
+
+    .diagram-row:hover .diagram-item:not(:hover) {
+        opacity: 0.4;
+    }
+
+    /* Lightbox-style hover preview: always mounted, just invisible, so
+       opacity/transform can animate smoothly with nothing snapping into a
+       different layout mode mid-transition. */
+    .diagram-lightbox {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.75);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+        z-index: 100;
+    }
+
+    .diagram-lightbox img {
+        max-width: 90vw;
+        max-height: 85vh;
+        width: auto;
+        border-radius: 4px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+        transform: scale(0.94);
+        transition: transform 0.35s ease;
+    }
+
+    .diagram-item:hover .diagram-lightbox {
+        opacity: 1;
+    }
+
+    .diagram-item:hover .diagram-lightbox img {
+        transform: scale(1);
+    }
+
+    @media (max-width: 720px) {
+        .diagram-row {
+            flex-direction: column;
+        }
+    }
 </style>
 
 <head>
@@ -31,12 +104,132 @@
 </head>
 
 <body style="background-color: #95a7b1;">
-    <h1 style="color:rgb(0, 0, 0);background-color: #566777;">Lucas Samaniego - Portfolio</h1>
+<div class="page-wrap">
+    <h1 style="color:rgb(0, 0, 0);background-color: #566777;">Lucas Samaniego - Resume Media</h1>
     <hr>
     <p>Google Docs Resume <a
             href="https://docs.google.com/document/d/1PscZAtftNYfNi3xHErcwz5fz8cU_lHbwwfuhnruo1dQ/edit?usp=sharing"
             target="_blank" rel="noopener noreferrer">link</a>.</p>
     <hr>
+
+    <h2>Kraken Submersibles - Nautilus AUV</h2>
+    <p>
+        Kraken Submersibles is New Mexico State University's first entry into RoboSub, an
+        international autonomous underwater vehicle (AUV) competition. I served as Embedded
+        Systems &amp; Autonomy Lead on a 7-person team, starting from zero in September 2025 -
+        no prior team history, no established budget, and no existing architecture to inherit.
+        The team's website (which I built, linked below) scored 18th of 58 international teams
+        on that portion of judging, and the vehicle qualified at competition.
+    </p>
+
+    <h3>Systems Architecture</h3>
+    <p>
+        I authored the complete power and data architecture for the vehicle - every subsystem
+        interface, from dual 14.8V LiPo batteries through the PM07 power distribution board to
+        eight thrusters, and from four hydrophones through a custom preamp/ADC into the Jetson
+        Orin Nano's I2S bus. This was the single largest time investment of the project:
+        verifying, validating, and illustrating the system down to individual wires and how
+        they communicate, then testing each component piecewise before final integration.
+    </p>
+    <div class="diagram-row">
+        <div class="diagram-item">
+            <img src="src/works/img/nautilus_data_diagram.png" alt="Nautilus data diagram">
+            <p>Data architecture - signal and communication paths, designed and illustrated by me</p>
+            <div class="diagram-lightbox">
+                <img src="src/works/img/nautilus_data_diagram.png" alt="Nautilus data diagram, enlarged">
+            </div>
+        </div>
+        <div class="diagram-item">
+            <img src="src/works/img/nautilus_power_diagram.png" alt="Nautilus power distribution diagram">
+            <p>Power distribution architecture - designed and illustrated by me</p>
+            <div class="diagram-lightbox">
+                <img src="src/works/img/nautilus_power_diagram.png" alt="Nautilus power distribution diagram, enlarged">
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <h3>Hydrophone Preamp PCB</h3>
+    <p>
+        I designed a 4-channel JFET hydrophone preamplifier and ADC board from scratch,
+        adapting a reference topology (Alex Rice / Zach Poff) into a full production design in
+        KiCad. The board takes signal from four Aquarian AS-1 hydrophones, preamplifies it
+        through discrete JFET stages, and digitizes all four channels synchronously through a
+        PCM1865 ADC over I2S to the Jetson.<br><br>
+        The design went through several major iterations over months of work: an initial hand
+        sketch, a breadboard prototype to validate the analog stage, and recurring design
+        reviews with Dr. Furth, a former EE professor, to pressure-test the circuit before
+        committing to a board. The final version splits the design into mother and daughter
+        boards to isolate analog and digital signal domains - a change made specifically to
+        keep the noise floor clean and make future troubleshooting easier.
+    </p>
+    <ul>
+        <li>Reverse-polarity protection, status LEDs for power/COMM, resettable fuse, and 0-ohm test-point resistors for troubleshooting</li>
+        <li>Fabricated through JLCPCB (5-board minimum run), including their DFM verification process</li>
+        <li>Hand-soldered all non-SMD components and bring-up tested before competition</li>
+        <li>Validated the I2S data path end-to-end using a UMC404HD as a test-bench substitute for the Jetson</li>
+    </ul>
+    <p>Board photos and KiCad renders coming soon - full TDOA (time-difference-of-arrival) testing is planned once the sub is back in the lab.</p>
+    <hr>
+
+    <h3>Program &amp; Budget Ownership</h3>
+    <p>
+        Before the team had confirmed funding, I built a tiered technical budget so we could
+        make component decisions at whatever funding level we ended up with, rather than
+        stalling on procurement. I owned every line of the bill of materials except
+        frame/mechanical material selection.
+        <ul>
+            <li>$7,500: minimum viable build - OEM parts kept to a minimum, maximizing in-house fabrication</li>
+            <li>$11,000: entry-level DVL added, with tradeoffs elsewhere to compensate</li>
+            <li>$15,000: Nucleus-tier DVL, rebalancing quality across the rest of the BOM</li>
+            <li>$20,000+: full upgrade path - freedom to improve every subsystem</li>
+        </ul>
+    </p>
+    <p>
+        I also led the team's sponsorship outreach to Nortek Group, attending every meeting
+        through to close - the result was a Nortek Nucleus1000 DVL at a $5,000 discount, with
+        NMSU covering the remaining $5,000. Separately, I organized and initially fronted
+        $4,250 in travel costs (hotel and rental car for a 7-person team) and secured
+        reimbursement funding from NMSU through direct outreach to Dr. Garcia.
+    </p>
+    <hr>
+
+    <h3>Mechanical Contribution</h3>
+    <p>
+        During first-semester initial design proposals, I contributed shell design concepts
+        modeled in SolidWorks, exploring hull geometry options ahead of the team's final
+        mechanical direction.
+    </p>
+    <p><a href="src/works/docs/shell-proposal.pdf" target="_blank" rel="noopener noreferrer">shell proposal drawing (PDF)</a></p>
+    <hr>
+
+    <h3>Team Website &amp; Media</h3>
+    <p>
+        I built the team's competition-required website from scratch - HTML/CSS, no template -
+        and it was the highest-scoring part of our submission, ranking 18th of 58 international
+        teams on that criterion. I also organized and shot the team's required competition
+        video, then edited it end-to-end myself. Separately, I sourced the team logo: taking a
+        teammate's sketch, commissioning an artist to finalize it, and preparing production-ready
+        formats (SVG, sticker printing, and a silkscreen-ready negative for the PCB).
+    </p>
+    <p><a href="kraken.html" target="_blank" rel="noopener noreferrer">view the live team site</a></p>
+    <hr>
+
+    <h3>Competition Execution</h3>
+    <p>
+        At competition, working autonomy wasn't ready. Rather than scratch the run, I wrote a
+        script to hard-code a command sequence that let the vehicle execute a qualifying run
+        without full autonomy - on an average of two hours of sleep a night across the event.
+        In the days before travel, I got help from a friend outside the team (Wen), and we
+        worked tirelessly building and testing computer-vision scripts at the NMSU pool, trying
+        to get autonomy working in time. It didn't make the deadline, but the qualifying run
+        held.<br><br>
+        I've also kept detailed project logs since September 2025 and organized the team's
+        datasheet archive, and I'm working on a continuity log to help next year's capstone
+        team pick up the project from where we finished.
+    </p>
+    <hr>
+
     <h2>Rubik's Cube Simulation Project</h2>
     <p>
         Through the Electrical & Computer Engineering curriculum at NMSU, there is an Embedded Systems course (EE 112)
@@ -92,29 +285,29 @@
     </p>
 
     <div class="gallery">
-        <a target="_blank" href="images/2D cube diagram finished.jpg">
-            <img src="images/2D cube diagram finished.jpg" alt="2D display" width="600" height="400">
+        <a target="_blank" href="src/works/img/2D cube diagram finished.jpg">
+            <img src="src/works/img/2D cube diagram finished.jpg" alt="2D display" width="600" height="400">
         </a>
         <div class="desc">2D display mapped to LCD Shield</div>
     </div>
 
     <div class="gallery">
-        <a target="_blank" href="images/3D diagram.jpg">
-            <img src="images/3D diagram.jpg" alt="3D display" width="600" height="400">
+        <a target="_blank" href="src/works/img/3D diagram.jpg">
+            <img src="src/works/img/3D diagram.jpg" alt="3D display" width="600" height="400">
         </a>
         <div class="desc">3D display mapped to LCD Shield</div>
     </div>
 
     <div class="gallery">
-        <a target="_blank" href="images/2D and 3D diagram.jpg">
-            <img src="images/2D and 3D diagram.jpg" alt="2D/3D completed" width="600" height="400">
+        <a target="_blank" href="src/works/img/2D and 3D diagram.jpg">
+            <img src="src/works/img/2D and 3D diagram.jpg" alt="2D/3D completed" width="600" height="400">
         </a>
         <div class="desc">2D and 3D mapped to LCD Shield</div>
     </div>
 
     <div class="gallery">
-        <a target="_blank" href="images/Demo image.jpg">
-            <img src="images/Demo image.jpg" alt="Demo image" width="600" height="400">
+        <a target="_blank" href="src/works/img/Demo image.jpg">
+            <img src="src/works/img/Demo image.jpg" alt="Demo image" width="600" height="400">
         </a>
         <div class="desc">demo physical vs. virtual</div>
     </div>
@@ -138,64 +331,64 @@
 
         
     </p>
-    <img src="images/2-edited.jpg" alt="EMS enclosure installed not wired" width="50%" height="50%">
+    <img src="src/works/img/2-edited.jpg" alt="EMS enclosure installed not wired" width="50%" height="50%">
     <p>EMS enclosure installed but not wired up</p>
     <hr>
-    <img src="images/3-edited.jpg" alt="EMS enclosure and extra enclosure" width="50%" height="50%">
+    <img src="src/works/img/3-edited.jpg" alt="EMS enclosure and extra enclosure" width="50%" height="50%">
     <p>EMS enclosure and other enclosure for more controls</p>
     <hr>
-    <img src="images/4-edited.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/4-edited.jpg" alt="" width="50%" height="50%">
     <p>EMS Enclosure wired into facility</p>
     <hr>
-    <img src="images/5.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/5.jpg" alt="" width="50%" height="50%">
     <p>extra enclosure wired</p>
     <hr>
-    <img src="images/6.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/6.jpg" alt="" width="50%" height="50%">
     <p>egauge monitoring system</p>
     <hr>
-    <img src="images/7 - CT install.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/7 - CT install.jpg" alt="" width="50%" height="50%">
     <p>CT's installed for monitoring amperes onto facility mains</p>
     <hr>
-    <img src="images/8 - kong electrical with solar.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/8 - kong electrical with solar.jpg" alt="" width="50%" height="50%">
     <p>facility electrical, including solar</p>
     <hr>
-    <img src="images/9 - CT  calibration.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/9 - CT  calibration.jpg" alt="" width="50%" height="50%">
     <p>CT calibration</p>
     <hr>
-    <img src="images/10 - rtu tstat wiring.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/10 - rtu tstat wiring.jpg" alt="" width="50%" height="50%">
     <p>Roof Top Unit (RTU) tstat wiring</p>
     <hr>
-    <img src="images/11 - kong RTUs.jpg" alt="" width="50%" height="50%">
+    <img src="src/works/img/11 - kong RTUs.jpg" alt="" width="50%" height="50%">
     <p>RTU's on roof of facility</p>
     <hr>
-    <img src="images/12 - Kong Wiring Layout.png" alt="" width="50%" height="50%">
+    <img src="src/works/img/12 - Kong Wiring Layout.png" alt="" width="50%" height="50%">
     <p>Wiring layout for monitoring/automating AC for facility</p>
     <hr>
-    <img src="images/13 - Kong Sensor Layout With Mapping.png" alt="" width="50%" height="50%">
+    <img src="src/works/img/13 - Kong Sensor Layout With Mapping.png" alt="" width="50%" height="50%">
     <p>Temperature Sensors mapping diagram</p>
     <hr>
-    <img src="images/14 - backend software.PNG" alt="" width="50%" height="50%">
+    <img src="src/works/img/14 - backend software.PNG" alt="" width="50%" height="50%">
     <p>A view of the monitoring software backend</p>
     <hr>
-    <img src="images/15 - (other) example of monitoring graphs.PNG" alt="" width="50%" height="50%">
+    <img src="src/works/img/15 - (other) example of monitoring graphs.PNG" alt="" width="50%" height="50%">
     <p>an older webpage showing energy use and other sensors</p>
     <hr>
-    <img src="images/16 - Dispenser Monitoring Updgrade Diagram.png" alt="" width="50%" height="50%">
+    <img src="src/works/img/16 - Dispenser Monitoring Updgrade Diagram.png" alt="" width="50%" height="50%">
     <p>diagram explaining upgrade project across 50 locations</p>
     <hr>
-    <img src="images/17 - more backend.PNG" alt="" width="50%" height="50%">
+    <img src="src/works/img/17 - more backend.PNG" alt="" width="50%" height="50%">
     <p>expanded backend monitoring software</p>
     <hr>
-    <img src="images/18 - LAN webpage monitoring.PNG" alt="" width="50%" height="50%">
+    <img src="src/works/img/18 - LAN webpage monitoring.PNG" alt="" width="50%" height="50%">
     <p>Updated UI for webpage client (LAN)</p>
     <hr>
-    <img src="images/19.PNG" alt="" width="50%" height="50%">
+    <img src="src/works/img/19.PNG" alt="" width="50%" height="50%">
     <p>expanded backend monitoring data</p>
     <hr>
-    <img src="images/20.PNG" alt="" width="50%" height="50%">
+    <img src="src/works/img/20.PNG" alt="" width="50%" height="50%">
     <p>more energy monitoring UI</p>
     <hr>
-    <img src="images/21 - Residential System Diagram for Reference.png" alt="" width="50%" height="50%">
+    <img src="src/works/img/21 - Residential System Diagram for Reference.png" alt="" width="50%" height="50%">
     <p>Reference diagram for residential installs</p>
     <hr>
 
@@ -204,9 +397,9 @@
             href="https://docs.google.com/spreadsheets/d/1OyZWtFFBcjbpT9pBkKR9jknppp30H6-xkoSFfJfzxOQ/edit?usp=sharing"
             target="_blank" rel="noopener noreferrer">log</a></p>
     <p>I have two dogs, both border collies<br><br> Yuki</p>
-    <img src="images/yuki_bordercollie.jpg" alt="yuki border collie" width="50%" height="50%">
+    <img src="src/works/img/yuki_bordercollie.jpg" alt="yuki border collie" width="50%" height="50%">
     <p>and Rip</p>
-    <img src="images/rip_bat.jpg" alt="rip border collie" width="50%" height="50%">
+    <img src="src/works/img/rip_bat.jpg" alt="rip border collie" width="50%" height="50%">
 
 
     <h2>Scratch Self-Learning Exercise "Cake Calamity"</h2>
@@ -225,7 +418,7 @@
         wasn't even aware
         of Scratch, so this experience broadened my horizons.
     </p>
-    <img src="images/cake_calamity_inside.png" alt="cake calamity inside" width="75%" height="75%">
+    <img src="src/works/img/cake_calamity_inside.png" alt="cake calamity inside" width="75%" height="75%">
     <p><a href="https://scratch.mit.edu/projects/787994230" target="_blank" rel="noopener noreferrer">link</a> to
         playable game</p>
 
@@ -248,7 +441,7 @@
     </p>
     <hr>
     <br>
-    <img src="images/UHF antenna.jpg" alt="UHF antenna" width="75%" height="75%">
+    <img src="src/works/img/UHF antenna.jpg" alt="UHF antenna" width="75%" height="75%">
     <p>UHF Antenna after replacing azimuth/elevation motor, and performing calibration</p>
 
     <hr>
@@ -277,12 +470,13 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
     <br>
-    <img src="images/wrench.jpg" alt="wrench.jpg" width="40%" height="40%">
-    <img src="images/wrench with nut.jpg" alt="wrench with nut.jpg" width="40%" height="40%">
+    <img src="src/works/img/wrench.jpg" alt="wrench.jpg" width="40%" height="40%">
+    <img src="src/works/img/wrench with nut.jpg" alt="wrench with nut.jpg" width="40%" height="40%">
     <br>
     <p>wrench modeled and printed for clean-room use. Made with SolidWorks <br>
         printed using Ender 3 v2 printer with PLA</p>
     <hr>
+</div>
 </body>
 
 </html>

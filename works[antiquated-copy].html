@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucas Samaniego — Portfolio</title>
+  <meta name="description" content="Electrical & Computer Engineering student portfolio — systems architecture, PCB design, and embedded systems work, including the Kraken Submersibles RoboSub AUV team." />
+
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="works.css?v=3" />
+</head>
+
+<body>
+  <div class="folio">
+
+    <!-- NAV -->
+    <nav class="folio-nav">
+      <div class="folio-nav__inner">
+        <a href="#top" class="folio-nav__name"><span class="dot">&gt;</span> lucas.samaniego</a>
+        <ul class="folio-nav__links">
+          <li><a href="#auv">auv_project</a></li>
+          <li><a href="#projects">other_projects</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+        <a class="folio-nav__resume"
+          href="https://docs.google.com/document/d/1PscZAtftNYfNi3xHErcwz5fz8cU_lHbwwfuhnruo1dQ/edit?usp=sharing"
+          target="_blank" rel="noopener">résumé.pdf ↗</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="folio-hero" id="top">
+      <div class="folio__inner">
+        <div class="folio-hero__eyebrow">Electrical &amp; Computer Engineering · NMSU · Class of 2026</div>
+        <h1 class="folio-hero__title">Systems, hardware, and the parts in between.</h1>
+        <p class="folio-hero__lede">
+          I design and build the layer where electrical hardware meets embedded software —
+          system architecture, PCB design, and the integration work that gets a project from
+          schematic to something that actually runs.
+        </p>
+        <div class="folio-hero__cta">
+          <a class="folio-btn folio-btn--primary" href="#auv">View Featured Project →</a>
+          <a class="folio-btn folio-btn--ghost"
+            href="https://docs.google.com/document/d/1PscZAtftNYfNi3xHErcwz5fz8cU_lHbwwfuhnruo1dQ/edit?usp=sharing"
+            target="_blank" rel="noopener">Read Résumé</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- =====================================================================
+       FEATURED PROJECT — KRAKEN SUBMERSIBLES / NAUTILUS AUV
+       ===================================================================== -->
+    <section class="folio-section" id="auv">
+      <div class="folio__inner">
+        <div class="folio-section__eyebrow"><span class="num">01</span> · Featured — Systems &amp; Hardware</div>
+        <h2 class="folio-section__title">Kraken Submersibles — Nautilus AUV</h2>
+        <p class="folio-section__lede">
+          NMSU's first entry into RoboSub, an international autonomous underwater vehicle
+          competition. 7-person team, no prior history to inherit — no budget, no
+          architecture, no established process.
+        </p>
+
+        <div class="folio-meta-line">
+          <div class="folio-meta-line__item"><span class="folio-meta-line__key">role</span><span class="folio-meta-line__val">Embedded Systems &amp; Autonomy Lead</span></div>
+          <div class="folio-meta-line__item"><span class="folio-meta-line__key">timeline</span><span class="folio-meta-line__val">Sept 2025 – Present</span></div>
+          <div class="folio-meta-line__item"><span class="folio-meta-line__key">team</span><span class="folio-meta-line__val">7 members</span></div>
+          <div class="folio-meta-line__item"><span class="folio-meta-line__key">result</span><span class="folio-meta-line__val folio-meta-line__val--accent">qualified · site 18th/58</span></div>
+        </div>
+
+        <!-- SYSTEMS ARCHITECTURE -->
+        <div class="folio-subsection">
+          <div class="folio-subsection__head">
+            <span class="folio-subsection__tag">design</span>
+            <h3>Systems Architecture</h3>
+          </div>
+          <p>
+            Authored the complete power and data architecture for the vehicle — every
+            subsystem interface, from dual 14.8V LiPo batteries through the PM07 power
+            distribution board to eight thrusters, and from four hydrophones through a
+            custom preamp/ADC into the Jetson Orin Nano's I²S bus. The largest time
+            investment of the project: verifying, validating, and illustrating the system
+            down to individual wires, then testing each component piecewise before final
+            integration.
+          </p>
+          <div class="folio-media-grid">
+            <div class="folio-media folio-media--zoomable">
+              <img src="assets/img/nautilus_power_diagram.png" alt="Nautilus power distribution diagram" />
+              <div class="folio-media__caption">fig.01 — power distribution architecture</div>
+            </div>
+            <div class="folio-placeholder">
+              <strong>Data diagram pending</strong>
+              <!-- TODO: export "Nautilus Data Diagram.pdf" as an image → assets/img/nautilus_data_diagram.png -->
+              waiting on export of Nautilus Data Diagram.pdf → assets/img/nautilus_data_diagram.png
+            </div>
+          </div>
+        </div>
+
+        <!-- PCB DESIGN -->
+        <div class="folio-subsection">
+          <div class="folio-subsection__head">
+            <span class="folio-subsection__tag">hardware</span>
+            <h3>Hydrophone Preamp PCB</h3>
+          </div>
+          <p>
+            Designed a 4-channel JFET hydrophone preamplifier and ADC board from scratch,
+            adapting a reference topology (Alex Rice / Zach Poff) into a full production
+            design in KiCad. Takes signal from four Aquarian AS-1 hydrophones, preamplifies
+            through discrete JFET stages, and digitizes all four channels synchronously
+            through a PCM1865 ADC over I²S to the Jetson.
+          </p>
+          <p>
+            Went through several major iterations over months: hand sketch → breadboard
+            prototype validating the analog stage → recurring design reviews with Dr. Furth
+            (former EE professor) to pressure-test the circuit → final board, split into
+            mother and daughter boards to isolate analog/digital signal domains and keep
+            the noise floor clean.
+          </p>
+          <ul>
+            <li>Reverse-polarity protection, power/COMM status LEDs, resettable fuse, 0Ω test points for troubleshooting</li>
+            <li>Fabricated through JLCPCB (5-board min. run), including their DFM verification process</li>
+            <li>Hand-soldered all non-SMD components, bring-up tested before competition</li>
+            <li>I²S data path validated end-to-end using a UMC404HD as a Jetson test-bench substitute</li>
+          </ul>
+          <div class="folio-placeholder">
+            <strong>Board photos incoming</strong>
+            physical board + KiCad renders to be added. Full TDOA validation planned once the sub is back in the lab.
+          </div>
+        </div>
+
+        <!-- PROGRAM, BUDGET & SPONSORSHIP -->
+        <div class="folio-subsection">
+          <div class="folio-subsection__head">
+            <span class="folio-subsection__tag">leadership</span>
+            <h3>Program &amp; Budget Ownership</h3>
+          </div>
+          <p>
+            Built a tiered technical budget before the team had confirmed funding, so
+            component decisions could proceed at whatever funding level materialized rather
+            than stalling on procurement. Owned every BOM line except frame/mechanical
+            material selection.
+          </p>
+          <table class="folio-budget-table">
+            <tr><td>$7,500</td><td>Minimum viable build — OEM parts kept to a minimum, maximizing in-house fabrication</td></tr>
+            <tr><td>$11,000</td><td>Entry-level DVL added, tradeoffs elsewhere to compensate</td></tr>
+            <tr><td>$15,000</td><td>Nucleus-tier DVL, rebalancing quality across the rest of the BOM</td></tr>
+            <tr><td>$20,000+</td><td>Full upgrade path — freedom to improve every subsystem</td></tr>
+          </table>
+          <p>
+            Led sponsorship outreach to Nortek Group through to close — result: a Nortek
+            Nucleus1000 DVL at a $5,000 discount, with NMSU covering the remaining $5,000.
+            Separately organized and initially fronted $4,250 in travel costs (hotel + rental
+            car, 7-person team) and secured reimbursement from NMSU through direct outreach
+            to Dr. Garcia.
+          </p>
+        </div>
+
+        <!-- MECHANICAL -->
+        <div class="folio-subsection">
+          <div class="folio-subsection__head">
+            <span class="folio-subsection__tag">cad</span>
+            <h3>Mechanical Contribution</h3>
+          </div>
+          <p>
+            Contributed shell design concepts during first-semester initial design
+            proposals, modeled in SolidWorks, exploring hull geometry ahead of the team's
+            final mechanical direction.
+          </p>
+          <!-- TODO: save "shell proposal.pdf" to assets/docs/shell-proposal.pdf -->
+          <a class="folio-doc-link" href="assets/docs/shell-proposal.pdf" target="_blank" rel="noopener">
+            <span class="folio-doc-link__icon">PDF</span>
+            <span class="folio-doc-link__body">
+              <h4>Shell Proposal — SolidWorks Drawing</h4>
+              <p>Front / back / isometric views, first-semester hull concept</p>
+            </span>
+          </a>
+        </div>
+
+        <!-- WEBSITE & MEDIA -->
+        <div class="folio-subsection">
+          <div class="folio-subsection__head">
+            <span class="folio-subsection__tag">web / video</span>
+            <h3>Team Website &amp; Media</h3>
+          </div>
+          <p>
+            Built the team's competition-required website from scratch — highest-scoring
+            part of the submission, ranking 18th of 58 international teams on that
+            criterion. Organized and shot the team's required competition video, edited
+            end-to-end. Sourced the team logo: took a teammate's sketch, commissioned an
+            artist to finalize it, and prepared production formats (SVG, sticker print, and
+            a silkscreen-ready negative for the PCB).
+          </p>
+          <a class="folio-btn folio-btn--ghost" href="kraken.html" target="_blank" rel="noopener">View Live Site →</a>
+        </div>
+
+        <!-- COMPETITION EXECUTION -->
+        <div class="folio-subsection">
+          <div class="folio-subsection__head">
+            <span class="folio-subsection__tag">under pressure</span>
+            <h3>Competition Execution</h3>
+          </div>
+          <p>
+            Working autonomy wasn't ready at competition. Rather than scratch the run,
+            wrote a script to hard-code a command sequence that let the vehicle execute a
+            qualifying run without full autonomy — on an average of two hours of sleep a
+            night. In the days before travel, pulled in a friend (Wen, outside the team) to
+            build and test computer-vision scripts at the NMSU pool. Autonomy didn't make
+            the deadline; the qualifying run held.
+          </p>
+          <p>
+            Maintained detailed project logs since September 2025 and organized the team's
+            datasheet archive; currently building a continuity log so next year's capstone
+            team can pick up the project without starting from zero.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+       OTHER PROJECTS
+       ===================================================================== -->
+    <section class="folio-section folio-section--alt" id="projects">
+      <div class="folio__inner">
+        <div class="folio-section__eyebrow"><span class="num">02</span> · Prior Work</div>
+        <h2 class="folio-section__title">Other Projects</h2>
+
+        <!-- DENCOR -->
+        <article class="folio-proj-card">
+          <div class="folio-proj-card__head">
+            <h3>Dencor — Project Manager</h3>
+            <div class="folio-proj-card__meta">Energy Management Systems · Feb 2016 – Oct 2018</div>
+          </div>
+          <p>
+            Facilitated Energy Management System installations for commercial clients,
+            including a full install at the <a href="https://www.kongcompany.com/" target="_blank" rel="noopener">Kong
+            Headquarters</a> in Golden, CO — planning and configuring the system, quoting
+            time and materials, running the install, and acting as ongoing point of contact
+            for the client's facility manager.
+          </p>
+          <div class="folio-gallery">
+            <div class="folio-gallery__item">
+              <img src="images/2-edited.jpg" alt="EMS enclosure installed not wired" />
+              <span>EMS enclosure, pre-wiring</span>
+            </div>
+            <div class="folio-gallery__item">
+              <img src="images/4-edited.jpg" alt="EMS enclosure wired into facility" />
+              <span>EMS enclosure wired</span>
+            </div>
+            <div class="folio-gallery__item">
+              <img src="images/6.jpg" alt="egauge monitoring system" />
+              <span>eGauge monitoring</span>
+            </div>
+            <div class="folio-gallery__item">
+              <img src="images/7 - CT install.jpg" alt="CT install for amperage monitoring" />
+              <span>CT install, amperage monitoring</span>
+            </div>
+            <div class="folio-gallery__item">
+              <img src="images/12 - Kong Wiring Layout.png" alt="Wiring layout diagram" />
+              <span>HVAC automation wiring layout</span>
+            </div>
+            <div class="folio-gallery__item">
+              <img src="images/14 - backend software.PNG" alt="Monitoring software backend" />
+              <span>Monitoring software backend</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PLANET LABS -->
+        <article class="folio-proj-card">
+          <div class="folio-proj-card__head">
+            <h3>Planet Labs — UHF Antenna Technician</h3>
+            <div class="folio-proj-card__meta">On-call · Jan 2020 – 2024</div>
+          </div>
+          <div class="folio-split">
+            <p>
+              On-call technician for a UHF satellite ground station hosted at NMSU on
+              behalf of Planet Labs PBC. Troubleshot and repaired antenna hardware,
+              replaced parts, and coordinated remotely with a Ground Station Engineer at
+              their HQ.
+            </p>
+            <div class="folio-media">
+              <iframe src="https://www.youtube-nocookie.com/embed/F-9jElBxB1w" title="UHF antenna azimuth motor test"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen style="aspect-ratio:16/9;height:auto;"></iframe>
+              <div class="folio-media__caption">testing azimuth motor range of motion before replacement</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- RUBIK'S CUBE -->
+        <article class="folio-proj-card">
+          <div class="folio-proj-card__head">
+            <h3>Rubik's Cube Simulator</h3>
+            <div class="folio-proj-card__meta">Arduino C++ · NMSU EE 112 final project</div>
+          </div>
+          <div class="folio-split">
+            <p>
+              Real-time Rubik's Cube simulation on an Arduino Uno with a TFT LCD shield —
+              2D unfolded and 3D dimetric views driven off a 54-element state array, every
+              move validated to stay physically consistent with a real cube.
+              <a href="https://drive.google.com/file/d/1P4vyb9DDBw4XYmBrYnjBJs8IGeDG-TZ2/view?usp=sharing" target="_blank" rel="noopener">Full log (PDF)</a>
+              ·
+              <a href="https://github.com/cakeypop/Rubik-s-Cube-Simulator" target="_blank" rel="noopener">GitHub</a>
+            </p>
+            <div class="folio-media">
+              <iframe src="https://www.youtube-nocookie.com/embed/w5rjvJRdKtY?start=13" title="Rubik's Cube Simulator demo"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen style="aspect-ratio:16/9;height:auto;"></iframe>
+              <div class="folio-media__caption">solved state → cube-in-a-cube pattern, mirrored on the LCD</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3D PRINTING -->
+        <article class="folio-proj-card">
+          <div class="folio-proj-card__head">
+            <h3>3D Printing &amp; CAD</h3>
+            <div class="folio-proj-card__meta">SolidWorks, SketchUp, Autodesk · Since 2021</div>
+          </div>
+          <div class="folio-split">
+            <p>
+              Self-taught CAD and FDM printing since acquiring an Ender 3 v2 in 2021.
+              Example: a cleanroom-compatible hex wrench commissioned by a biomedical lab,
+              sized for tight equipment clearances and designed to tolerate cleanroom
+              sanitization.
+              <a href="https://docs.google.com/document/d/17ZUEpyxQPvNFUxvwZSrAVsOXOflRIBACSRWUdwQUe-Y/edit?usp=sharing" target="_blank" rel="noopener">Project log (incomplete)</a>
+            </p>
+            <div class="folio-media">
+              <iframe src="https://www.youtube-nocookie.com/embed/MRfj_hTS5i0" title="Wrench 3D print"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen style="aspect-ratio:16/9;height:auto;"></iframe>
+              <div class="folio-media__caption">cleanroom hex wrench — SolidWorks, printed in PLA</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SCRATCH -->
+        <article class="folio-proj-card">
+          <div class="folio-proj-card__head">
+            <h3>"Cake Calamity" — Scratch Game</h3>
+            <div class="folio-proj-card__meta">CS50x self-paced coursework</div>
+          </div>
+          <p>
+            Built as part of Harvard's <a href="https://www.edx.org/learn/computer-science/harvard-university-cs50-s-introduction-to-computer-science" target="_blank" rel="noopener">CS50x</a>
+            course. Features rule-based enemy behavior layered onto a simple game loop.
+            <a href="https://scratch.mit.edu/projects/787994230" target="_blank" rel="noopener">Play it here</a>
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+    <footer class="folio-footer" id="contact">
+      <div class="folio__inner">
+        <div class="folio-footer__personal">
+          Outside of engineering: I run (<a href="https://docs.google.com/spreadsheets/d/1OyZWtFFBcjbpT9pBkKR9jknppp30H6-xkoSFfJfzxOQ/edit?usp=sharing" target="_blank" rel="noopener">5K log</a>)
+          and have two border collies, Yuki and Riptide.<br />
+          <img src="images/yuki_bordercollie.jpg" alt="Yuki, border collie" />
+          <img src="images/rip_bat.jpg" alt="Riptide, border collie" />
+        </div>
+        <div class="folio-footer__bottom">
+          <span>Las Cruces, NM · luke.samaniego@outlook.com</span>
+          <span>
+            <a href="https://docs.google.com/document/d/1PscZAtftNYfNi3xHErcwz5fz8cU_lHbwwfuhnruo1dQ/edit?usp=sharing" target="_blank" rel="noopener">résumé</a>
+            · <a href="kraken.html" target="_blank" rel="noopener">kraken submersibles</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="folio-lightbox" id="folio-lightbox">
+    <button class="folio-lightbox__close" id="folio-lightbox-close" type="button">esc ✕</button>
+    <img id="folio-lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('folio-lightbox');
+      var lightboxImg = document.getElementById('folio-lightbox-img');
+      if (!lightbox) return;
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('is-open');
+      }
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+      }
+
+      // Any image inside a zoomable media block, a gallery item, or the footer
+      // personal photos opens in the lightbox instead of navigating.
+      document.querySelectorAll(
+        '.folio-media--zoomable img, .folio-gallery__item img, .folio-footer__personal img'
+      ).forEach(function (img) {
+        img.addEventListener('click', function () {
+          openLightbox(img.src, img.alt);
+        });
+      });
+
+      document.getElementById('folio-lightbox-close').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
+  </script>
+</body>
+
+</html>
