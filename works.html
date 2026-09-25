@@ -113,12 +113,114 @@
     <hr>
 
     <h2>Kraken Submersibles - Nautilus AUV</h2>
-    <!-- Section cleared for rewrite. Available assets:
-         src/works/img/nautilus_data_diagram.png
-         src/works/img/nautilus_power_diagram.png
-         src/works/docs/shell-proposal.pdf
-         Diagram markup pattern (.diagram-row / .diagram-item / .diagram-lightbox)
-         is styled in the <style> block at the top of this file. -->
+    <p>
+        Kraken Submersibles is New Mexico State University's first entry into RoboSub, an
+        international autonomous underwater vehicle (AUV) competition. I served as Embedded
+        Systems &amp; Autonomy Lead on a 7-person team, starting from zero in September 2025 -
+        no prior team history, no established budget, and no existing architecture to inherit.
+        The team's website (which I built, linked below) scored 18th of 58 international teams
+        on that portion of judging, and the vehicle qualified at competition.
+    </p>
+
+    <h3>Systems Architecture</h3>
+    <p>
+        I authored the complete power and data architecture for the vehicle - every subsystem
+        interface, from dual 14.8V LiPo batteries through the PM07 power distribution board to
+        eight thrusters, and from four hydrophones through a custom preamp/ADC into the Jetson
+        Orin Nano's I2S bus. This was the single largest time investment of the project:
+        verifying, validating, and illustrating the system down to individual wires and how
+        they communicate, then testing each component piecewise before final integration.
+    </p>
+    <img src="src/works/img/nautilus_data_diagram.png" alt="Nautilus data diagram" width="50%" height="50%">
+    <p>Data architecture - signal and communication paths, designed and illustrated by me</p>
+    <hr>
+    <img src="src/works/img/nautilus_power_diagram.png" alt="Nautilus power distribution diagram" width="50%" height="50%">
+    <p>Power distribution architecture - designed and illustrated by me</p>
+    <hr>
+
+    <h3>Hydrophone Preamp PCB</h3>
+    <p>
+        I designed a 4-channel JFET hydrophone preamplifier and ADC board from scratch,
+        adapting a reference topology (Alex Rice / Zach Poff) into a full production design in
+        KiCad. The board takes signal from four Aquarian AS-1 hydrophones, preamplifies it
+        through discrete JFET stages, and digitizes all four channels synchronously through a
+        PCM1865 ADC over I2S to the Jetson.<br><br>
+        The design went through several major iterations over months of work: an initial hand
+        sketch, a breadboard prototype to validate the analog stage, and recurring design
+        reviews with Dr. Furth, a former EE professor, to pressure-test the circuit before
+        committing to a board. The final version splits the design into mother and daughter
+        boards to isolate analog and digital signal domains - a change made specifically to
+        keep the noise floor clean and make future troubleshooting easier.
+    <ul>
+        <li>Reverse-polarity protection, status LEDs for power/COMM, resettable fuse, and 0-ohm test-point resistors for troubleshooting</li>
+        <li>Fabricated through JLCPCB (5-board minimum run), including their DFM verification process</li>
+        <li>Hand-soldered all non-SMD components and bring-up tested before competition</li>
+        <li>Validated the I2S data path end-to-end using a UMC404HD as a test-bench substitute for the Jetson</li>
+    </ul>
+    </p>
+    <p>
+        Board photos and KiCad renders coming soon - full TDOA (time-difference-of-arrival)
+        testing is planned once the sub is back in the lab.
+    </p>
+    <hr>
+
+    <h3>Program &amp; Budget Ownership</h3>
+    <p>
+        Before the team had confirmed funding, I built a tiered technical budget so we could
+        make component decisions at whatever funding level we ended up with, rather than
+        stalling on procurement. I owned every line of the bill of materials except
+        frame/mechanical material selection.
+        <ul>
+            <li>$7,500: minimum viable build - OEM parts kept to a minimum, maximizing in-house fabrication</li>
+            <li>$11,000: entry-level DVL added, with tradeoffs elsewhere to compensate</li>
+            <li>$15,000: Nucleus-tier DVL, rebalancing quality across the rest of the BOM</li>
+            <li>$20,000+: full upgrade path - freedom to improve every subsystem</li>
+        </ul>
+    </p>
+    <p>
+        I also led the team's sponsorship outreach to Nortek Group, attending every meeting
+        through to close - the result was a Nortek Nucleus1000 DVL at a $5,000 discount, with
+        NMSU covering the remaining $5,000. Separately, I organized and initially fronted
+        $4,250 in travel costs (hotel and rental car for a 7-person team) and secured
+        reimbursement funding from NMSU through direct outreach to Dr. Garcia.
+    </p>
+    <hr>
+
+    <h3>Mechanical Contribution</h3>
+    <p>
+        During first-semester initial design proposals, I contributed shell design concepts
+        modeled in SolidWorks, exploring hull geometry options ahead of the team's final
+        mechanical direction.
+    </p>
+    <p><a href="src/works/docs/shell-proposal.pdf" target="_blank" rel="noopener noreferrer">shell proposal
+            drawing (PDF)</a></p>
+    <hr>
+
+    <h3>Team Website &amp; Media</h3>
+    <p>
+        I built the team's competition-required website from scratch - HTML/CSS, no template -
+        and it was the highest-scoring part of our submission, ranking 18th of 58 international
+        teams on that criterion. I also organized and shot the team's required competition
+        video, then edited it end-to-end myself. Separately, I sourced the team logo: taking a
+        teammate's sketch, commissioning an artist to finalize it, and preparing production-ready
+        formats (SVG, sticker printing, and a silkscreen-ready negative for the PCB).
+    </p>
+    <p><a href="kraken.html" target="_blank" rel="noopener noreferrer">view the live team site</a></p>
+    <hr>
+
+    <h3>Competition Execution</h3>
+    <p>
+        At competition, working autonomy wasn't ready. Rather than scratch the run, I wrote a
+        script to hard-code a command sequence that let the vehicle execute a qualifying run
+        without full autonomy - on an average of two hours of sleep a night across the event.
+        In the days before travel, I got help from a friend outside the team (Wen), and we
+        worked tirelessly building and testing computer-vision scripts at the NMSU pool, trying
+        to get autonomy working in time. It didn't make the deadline, but the qualifying run
+        held.<br><br>
+        I've also kept detailed project logs since September 2025 and organized the team's
+        datasheet archive, and I'm working on a continuity log to help next year's capstone
+        team pick up the project from where we finished.
+    </p>
     <hr>
 
     <h2>Rubik's Cube Simulation Project</h2>
