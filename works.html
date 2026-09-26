@@ -95,6 +95,71 @@
             flex-direction: column;
         }
     }
+
+    /* Slideshow: one image at a time, advanced by the prev/next buttons or by
+       clicking the image. The stage keeps a fixed aspect ratio so the page
+       doesn't jump when stepping between portrait and landscape shots. */
+    .slideshow {
+        width: 50%;
+        min-width: 280px;
+        margin: 16px 0 24px;
+    }
+
+    .slideshow__stage {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #566777;
+        border: 1px solid #44525f;
+        border-radius: 4px;
+    }
+
+    .slideshow__stage img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        display: block;
+        cursor: pointer;
+    }
+
+    .slideshow__caption {
+        margin: 8px 0 8px;
+        min-height: 3em;
+    }
+
+    .slideshow__controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .slideshow__controls button {
+        font: inherit;
+        padding: 4px 14px;
+        cursor: pointer;
+        color: #fff;
+        background: #566777;
+        border: 1px solid #44525f;
+        border-radius: 3px;
+    }
+
+    .slideshow__controls button:hover {
+        background: #44525f;
+    }
+
+    .slideshow__count {
+        font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 720px) {
+        .slideshow {
+            width: 100%;
+        }
+    }
 </style>
 
 <head>
@@ -324,65 +389,17 @@
 
         
     </p>
-    <img src="src/works/img/2-edited.jpg" alt="EMS enclosure installed not wired" width="50%" height="50%">
-    <p>EMS enclosure installed but not wired up</p>
-    <hr>
-    <img src="src/works/img/3-edited.jpg" alt="EMS enclosure and extra enclosure" width="50%" height="50%">
-    <p>EMS enclosure and other enclosure for more controls</p>
-    <hr>
-    <img src="src/works/img/4-edited.jpg" alt="" width="50%" height="50%">
-    <p>EMS Enclosure wired into facility</p>
-    <hr>
-    <img src="src/works/img/5.jpg" alt="" width="50%" height="50%">
-    <p>extra enclosure wired</p>
-    <hr>
-    <img src="src/works/img/6.jpg" alt="" width="50%" height="50%">
-    <p>egauge monitoring system</p>
-    <hr>
-    <img src="src/works/img/7 - CT install.jpg" alt="" width="50%" height="50%">
-    <p>CT's installed for monitoring amperes onto facility mains</p>
-    <hr>
-    <img src="src/works/img/8 - kong electrical with solar.jpg" alt="" width="50%" height="50%">
-    <p>facility electrical, including solar</p>
-    <hr>
-    <img src="src/works/img/9 - CT  calibration.jpg" alt="" width="50%" height="50%">
-    <p>CT calibration</p>
-    <hr>
-    <img src="src/works/img/10 - rtu tstat wiring.jpg" alt="" width="50%" height="50%">
-    <p>Roof Top Unit (RTU) tstat wiring</p>
-    <hr>
-    <img src="src/works/img/11 - kong RTUs.jpg" alt="" width="50%" height="50%">
-    <p>RTU's on roof of facility</p>
-    <hr>
-    <img src="src/works/img/12 - Kong Wiring Layout.png" alt="" width="50%" height="50%">
-    <p>Wiring layout for monitoring/automating AC for facility</p>
-    <hr>
-    <img src="src/works/img/13 - Kong Sensor Layout With Mapping.png" alt="" width="50%" height="50%">
-    <p>Temperature Sensors mapping diagram</p>
-    <hr>
-    <img src="src/works/img/14 - backend software.PNG" alt="" width="50%" height="50%">
-    <p>A view of the monitoring software backend</p>
-    <hr>
-    <img src="src/works/img/15 - (other) example of monitoring graphs.PNG" alt="" width="50%" height="50%">
-    <p>an older webpage showing energy use and other sensors</p>
-    <hr>
-    <img src="src/works/img/16 - Dispenser Monitoring Updgrade Diagram.png" alt="" width="50%" height="50%">
-    <p>diagram explaining upgrade project across 50 locations</p>
-    <hr>
-    <img src="src/works/img/17 - more backend.PNG" alt="" width="50%" height="50%">
-    <p>expanded backend monitoring software</p>
-    <hr>
-    <img src="src/works/img/18 - LAN webpage monitoring.PNG" alt="" width="50%" height="50%">
-    <p>Updated UI for webpage client (LAN)</p>
-    <hr>
-    <img src="src/works/img/19.PNG" alt="" width="50%" height="50%">
-    <p>expanded backend monitoring data</p>
-    <hr>
-    <img src="src/works/img/20.PNG" alt="" width="50%" height="50%">
-    <p>more energy monitoring UI</p>
-    <hr>
-    <img src="src/works/img/21 - Residential System Diagram for Reference.png" alt="" width="50%" height="50%">
-    <p>Reference diagram for residential installs</p>
+    <div class="slideshow" id="dencor-slideshow">
+        <div class="slideshow__stage">
+            <img id="dencor-image" src="src/works/img/2-edited.jpg" alt="EMS enclosure installed not wired">
+        </div>
+        <p class="slideshow__caption" id="dencor-caption">EMS enclosure installed but not wired up</p>
+        <div class="slideshow__controls">
+            <button type="button" id="dencor-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="dencor-count">1 / 20</span>
+            <button type="button" id="dencor-next">next &#8594;</button>
+        </div>
+    </div>
     <hr>
 
     <h2>Other</h2>
@@ -470,6 +487,69 @@
         printed using Ender 3 v2 printer with PLA</p>
     <hr>
 </div>
+
+<script>
+    // Dencor install slideshow. The images run 2-7MB each, so only the current
+    // slide is ever given a src - the rest load on demand as you step through,
+    // with the next one prefetched so the click feels instant.
+    (function () {
+        var slides = [
+            { src: 'src/works/img/2-edited.jpg', alt: 'EMS enclosure installed not wired', caption: 'EMS enclosure installed but not wired up' },
+            { src: 'src/works/img/3-edited.jpg', alt: 'EMS enclosure and extra enclosure', caption: 'EMS enclosure and other enclosure for more controls' },
+            { src: 'src/works/img/4-edited.jpg', alt: 'EMS enclosure wired into facility', caption: 'EMS Enclosure wired into facility' },
+            { src: 'src/works/img/5.jpg', alt: 'extra enclosure wired', caption: 'extra enclosure wired' },
+            { src: 'src/works/img/6.jpg', alt: 'egauge monitoring system', caption: 'egauge monitoring system' },
+            { src: 'src/works/img/7 - CT install.jpg', alt: 'CT install for amperage monitoring', caption: "CT's installed for monitoring amperes onto facility mains" },
+            { src: 'src/works/img/8 - kong electrical with solar.jpg', alt: 'facility electrical including solar', caption: 'facility electrical, including solar' },
+            { src: 'src/works/img/9 - CT  calibration.jpg', alt: 'CT calibration', caption: 'CT calibration' },
+            { src: 'src/works/img/10 - rtu tstat wiring.jpg', alt: 'Roof Top Unit tstat wiring', caption: 'Roof Top Unit (RTU) tstat wiring' },
+            { src: 'src/works/img/11 - kong RTUs.jpg', alt: 'RTUs on roof of facility', caption: "RTU's on roof of facility" },
+            { src: 'src/works/img/12 - Kong Wiring Layout.png', alt: 'Wiring layout diagram', caption: 'Wiring layout for monitoring/automating AC for facility' },
+            { src: 'src/works/img/13 - Kong Sensor Layout With Mapping.png', alt: 'Temperature sensor mapping diagram', caption: 'Temperature Sensors mapping diagram' },
+            { src: 'src/works/img/14 - backend software.PNG', alt: 'Monitoring software backend', caption: 'A view of the monitoring software backend' },
+            { src: 'src/works/img/15 - (other) example of monitoring graphs.PNG', alt: 'Older energy monitoring webpage', caption: 'an older webpage showing energy use and other sensors' },
+            { src: 'src/works/img/16 - Dispenser Monitoring Updgrade Diagram.png', alt: 'Dispenser monitoring upgrade diagram', caption: 'diagram explaining upgrade project across 50 locations' },
+            { src: 'src/works/img/17 - more backend.PNG', alt: 'Expanded backend monitoring software', caption: 'expanded backend monitoring software' },
+            { src: 'src/works/img/18 - LAN webpage monitoring.PNG', alt: 'LAN webpage monitoring UI', caption: 'Updated UI for webpage client (LAN)' },
+            { src: 'src/works/img/19.PNG', alt: 'Expanded backend monitoring data', caption: 'expanded backend monitoring data' },
+            { src: 'src/works/img/20.PNG', alt: 'Energy monitoring UI', caption: 'more energy monitoring UI' },
+            { src: 'src/works/img/21 - Residential System Diagram for Reference.png', alt: 'Residential system reference diagram', caption: 'Reference diagram for residential installs' }
+        ];
+
+        var root = document.getElementById('dencor-slideshow');
+        if (!root) return;
+
+        var image = document.getElementById('dencor-image');
+        var caption = document.getElementById('dencor-caption');
+        var count = document.getElementById('dencor-count');
+        var index = 0;
+
+        function show(next) {
+            index = (next + slides.length) % slides.length;
+            var slide = slides[index];
+            image.src = slide.src;
+            image.alt = slide.alt;
+            caption.textContent = slide.caption;
+            count.textContent = (index + 1) + ' / ' + slides.length;
+
+            // Warm the next slide so stepping forward doesn't wait on the download.
+            var upcoming = new Image();
+            upcoming.src = slides[(index + 1) % slides.length].src;
+        }
+
+        document.getElementById('dencor-prev').addEventListener('click', function () {
+            show(index - 1);
+        });
+        document.getElementById('dencor-next').addEventListener('click', function () {
+            show(index + 1);
+        });
+        image.addEventListener('click', function () {
+            show(index + 1);
+        });
+
+        show(0);
+    })();
+</script>
 </body>
 
 </html>
