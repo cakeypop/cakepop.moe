@@ -160,6 +160,58 @@
             width: 100%;
         }
     }
+
+    /* Stacked videos, each with its label above. Without display:block the
+       iframes are inline and sit side by side whenever two of them fit. */
+    .video-list iframe {
+        display: block;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .video-list p {
+        margin-bottom: 6px;
+    }
+
+    /* Jump-to table of contents at the top of the page. */
+    .toc {
+        margin: 16px 0;
+    }
+
+    .toc__title {
+        margin: 0 0 8px;
+        font-size: 1.1em;
+    }
+
+    .toc ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 10px;
+    }
+
+    .toc li a {
+        display: inline-block;
+        padding: 4px 12px;
+        color: #fff;
+        text-decoration: none;
+        background: #566777;
+        border: 1px solid #44525f;
+        border-radius: 3px;
+    }
+
+    .toc li a:hover,
+    .toc li a:focus {
+        background: #44525f;
+        text-decoration: underline;
+    }
+
+    /* Keep a jumped-to heading clear of the very top of the viewport. */
+    [id] {
+        scroll-margin-top: 12px;
+    }
 </style>
 
 <head>
@@ -176,119 +228,136 @@
             href="https://docs.google.com/document/d/1PscZAtftNYfNi3xHErcwz5fz8cU_lHbwwfuhnruo1dQ/edit?usp=sharing"
             target="_blank" rel="noopener noreferrer">link</a>.</p>
     <hr>
+    <nav class="toc">
+        <h2 class="toc__title">Jump to</h2>
+        <ul>
+            <li><a href="#auv">Autonomous Underwater Vehicle (AUV)</a></li>
+            <li><a href="#rubiks-cube">Rubik's Cube Simulation Project</a></li>
+            <li><a href="#music-box">Music Box</a></li>
+            <li><a href="#dencor">Dencor - Project Manager</a></li>
+            <li><a href="#cake-calamity">Scratch Self-Learning Exercise "Cake Calamity"</a></li>
+            <li><a href="#planet-labs">Planet Labs UHF Antenna work</a></li>
+            <li><a href="#3d-printing">3D Printing</a></li>
+            <li><a href="#other">Other</a></li>
+        </ul>
+    </nav>
+    <hr>
 
-    <h2>Kraken Submersibles - Nautilus AUV</h2>
+    <h2 id="auv">Autonomous Underwater Vehicle (AUV)</h2>
     <p>
         Kraken Submersibles is New Mexico State University's first entry into RoboSub, an
         international autonomous underwater vehicle (AUV) competition. I served as Embedded
-        Systems &amp; Autonomy Lead on a 7-person team, starting from zero in September 2025 -
-        no prior team history, no established budget, and no existing architecture to inherit.
-        The team's website (which I built, linked below) scored 18th of 58 international teams
-        on that portion of judging, and the vehicle qualified at competition.
+        Systems &amp; Autonomy Lead on a 7-person team, starting from zero in September 2025
+        with no prior team history, no established budget, and no existing architecture to
+        inherit. The team placed 33rd out of 58 teams overall. The team's website (which I
+        built, linked below) scored 18th of 58 international teams on that portion of judging,
+        and the vehicle qualified at competition.
     </p>
+    <div class="video-list">
+        <p>GoPro underwater footage of the Nautilus AUV qualifying for Semi-Finals during the
+            RoboSub2026 competition.</p>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MPPvgxhxEvA"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
 
-    <h3>Systems Architecture</h3>
-    <p>
-        I authored the complete power and data architecture for the vehicle - every subsystem
-        interface, from dual 14.8V LiPo batteries through the PM07 power distribution board to
-        eight thrusters, and from four hydrophones through a custom preamp/ADC into the Jetson
-        Orin Nano's I2S bus. This was the single largest time investment of the project:
-        verifying, validating, and illustrating the system down to individual wires and how
-        they communicate, then testing each component piecewise before final integration.
-    </p>
-    <img src="src/works/img/nautilus_data_diagram.png" alt="Nautilus data diagram" width="50%" height="50%">
-    <p>Data architecture - signal and communication paths, designed and illustrated by me</p>
-    <hr>
-    <img src="src/works/img/nautilus_power_diagram.png" alt="Nautilus power distribution diagram" width="50%" height="50%">
-    <p>Power distribution architecture - designed and illustrated by me</p>
-    <hr>
+        <p>Early ROV test run at university pool verifying ROV capability before proceeding to
+            autonomous function.</p>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/5YlMaRrsoIE"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
 
-    <h3>Hydrophone Preamp PCB</h3>
-    <p>
-        I designed a 4-channel JFET hydrophone preamplifier and ADC board from scratch,
-        adapting a reference topology (Alex Rice / Zach Poff) into a full production design in
-        KiCad. The board takes signal from four Aquarian AS-1 hydrophones, preamplifies it
-        through discrete JFET stages, and digitizes all four channels synchronously through a
-        PCM1865 ADC over I2S to the Jetson.<br><br>
-        The design went through several major iterations over months of work: an initial hand
-        sketch, a breadboard prototype to validate the analog stage, and recurring design
-        reviews with Dr. Furth, a former EE professor, to pressure-test the circuit before
-        committing to a board. The final version splits the design into mother and daughter
-        boards to isolate analog and digital signal domains - a change made specifically to
-        keep the noise floor clean and make future troubleshooting easier.
-    <ul>
-        <li>Reverse-polarity protection, status LEDs for power/COMM, resettable fuse, and 0-ohm test-point resistors for troubleshooting</li>
-        <li>Fabricated through JLCPCB (5-board minimum run), including their DFM verification process</li>
-        <li>Hand-soldered all non-SMD components and bring-up tested before competition</li>
-        <li>Validated the I2S data path end-to-end using a UMC404HD as a test-bench substitute for the Jetson</li>
-    </ul>
-    </p>
-    <p>
-        Board photos and KiCad renders coming soon - full TDOA (time-difference-of-arrival)
-        testing is planned once the sub is back in the lab.
-    </p>
-    <hr>
+        <p>Qualifying run footage - testing at midnight in the hotel pool during the competition</p>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Vx9vEPAfh90"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+    </div>
 
-    <h3>Program &amp; Budget Ownership</h3>
+    <h3>4-Channel Differential JFET Preamp + ADC PCB Design To Process Hydrophone Audio via I2S</h3>
     <p>
-        Before the team had confirmed funding, I built a tiered technical budget so we could
-        make component decisions at whatever funding level we ended up with, rather than
-        stalling on procurement. I owned every line of the bill of materials except
-        frame/mechanical material selection.
-        <ul>
-            <li>$7,500: minimum viable build - OEM parts kept to a minimum, maximizing in-house fabrication</li>
-            <li>$11,000: entry-level DVL added, with tradeoffs elsewhere to compensate</li>
-            <li>$15,000: Nucleus-tier DVL, rebalancing quality across the rest of the BOM</li>
-            <li>$20,000+: full upgrade path - freedom to improve every subsystem</li>
-        </ul>
+        Designed a custom board to process analog hydrophone data for Time Difference of
+        Arrival (TDoA) onboard calculations by the AUV computer. Differential JFET Preamp
+        &amp; Filtering design inspired by <a href="https://zachpoff.com/resources/alex-rice-piezo-preamplifier/"
+            target="_blank" rel="noopener noreferrer">here</a>, adding safety functionality such
+        as reverse polarity protections and various other design additions.
     </p>
-    <p>
-        I also led the team's sponsorship outreach to Nortek Group, attending every meeting
-        through to close - the result was a Nortek Nucleus1000 DVL at a $5,000 discount, with
-        NMSU covering the remaining $5,000. Separately, I organized and initially fronted
-        $4,250 in travel costs (hotel and rental car for a 7-person team) and secured
-        reimbursement funding from NMSU through direct outreach to Dr. Garcia.
-    </p>
+    <div class="slideshow" id="auv-pcb-slideshow">
+        <div class="slideshow__stage">
+            <img id="auv-pcb-image" src="images/AUV/PCB_Slideshow/PCB_A.png"
+                alt="Differential JFET Preamp design integration with AS-1 Hydrophones, early sketches">
+        </div>
+        <p class="slideshow__caption" id="auv-pcb-caption">Differential JFET Preamp design integration with AS-1
+            Hydrophones, early sketches</p>
+        <div class="slideshow__controls">
+            <button type="button" id="auv-pcb-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="auv-pcb-count">1 / 20</span>
+            <button type="button" id="auv-pcb-next">next &#8594;</button>
+        </div>
+    </div>
     <hr>
 
-    <h3>Mechanical Contribution</h3>
-    <p>
-        During first-semester initial design proposals, I contributed shell design concepts
-        modeled in SolidWorks, exploring hull geometry options ahead of the team's final
-        mechanical direction.
-    </p>
-    <p><a href="src/works/docs/shell-proposal.pdf" target="_blank" rel="noopener noreferrer">shell proposal
-            drawing (PDF)</a></p>
+    <h3>KiCad Schematics</h3>
+    <p>TODO: paragraph describing the schematics.</p>
+    <div class="slideshow" id="auv-kicad-slideshow">
+        <div class="slideshow__stage">
+            <img id="auv-kicad-image" src="images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065218.png" alt="TODO alt text - Screenshot 2026-09-28 065218.png">
+        </div>
+        <p class="slideshow__caption" id="auv-kicad-caption">TODO caption - Screenshot 2026-09-28 065218.png</p>
+        <div class="slideshow__controls">
+            <button type="button" id="auv-kicad-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="auv-kicad-count">1 / 3</span>
+            <button type="button" id="auv-kicad-next">next &#8594;</button>
+        </div>
+    </div>
+    <hr>
+
+    <h3>System Architecture Diagrams</h3>
+    <p>TODO: paragraph describing the data architecture.</p>
+    <div class="slideshow" id="auv-data-slideshow">
+        <div class="slideshow__stage">
+            <img id="auv-data-image" src="images/AUV/Data_Diagram_Slideshow/data_diagram_A.png" alt="TODO alt text - data_diagram_A.png">
+        </div>
+        <p class="slideshow__caption" id="auv-data-caption">TODO caption - data_diagram_A.png</p>
+        <div class="slideshow__controls">
+            <button type="button" id="auv-data-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="auv-data-count">1 / 9</span>
+            <button type="button" id="auv-data-next">next &#8594;</button>
+        </div>
+    </div>
+    <hr>
+
+    <h3>Misc</h3>
+    <p>TODO: paragraph for the misc images (folder still being updated).</p>
+    <div class="slideshow" id="auv-misc-slideshow">
+        <div class="slideshow__stage">
+            <img id="auv-misc-image" src="images/AUV/MISC/A_shell_design.jpg" alt="Shell design">
+        </div>
+        <p class="slideshow__caption" id="auv-misc-caption">Shell design</p>
+        <div class="slideshow__controls">
+            <button type="button" id="auv-misc-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="auv-misc-count">1 / 7</span>
+            <button type="button" id="auv-misc-next">next &#8594;</button>
+        </div>
+    </div>
     <hr>
 
     <h3>Team Website &amp; Media</h3>
     <p>
-        I built the team's competition-required website from scratch - HTML/CSS, no template -
-        and it was the highest-scoring part of our submission, ranking 18th of 58 international
-        teams on that criterion. I also organized and shot the team's required competition
-        video, then edited it end-to-end myself. Separately, I sourced the team logo: taking a
-        teammate's sketch, commissioning an artist to finalize it, and preparing production-ready
-        formats (SVG, sticker printing, and a silkscreen-ready negative for the PCB).
+        Created the <a href="kraken.html" target="_blank" rel="noopener noreferrer">website</a> for the
+        NMSU Kraken Submersibles RoboSub 2026 team, which placed 18th out of 58 teams
+        (<a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRFIz4fUxtK1p7pD0GRf8mYJGdG5wNQq_L8wrNF_xvTL37KEJT3oGB66BJb31gaiFGohmNzaSKBBYOA/pubhtml"
+            target="_blank" rel="noopener noreferrer">full results</a>).
     </p>
-    <p><a href="kraken.html" target="_blank" rel="noopener noreferrer">view the live team site</a></p>
+    <p>Planned and edited the team introduction video.</p>
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2smvYpim8k"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
     <hr>
 
-    <h3>Competition Execution</h3>
-    <p>
-        At competition, working autonomy wasn't ready. Rather than scratch the run, I wrote a
-        script to hard-code a command sequence that let the vehicle execute a qualifying run
-        without full autonomy - on an average of two hours of sleep a night across the event.
-        In the days before travel, I got help from a friend outside the team (Wen), and we
-        worked tirelessly building and testing computer-vision scripts at the NMSU pool, trying
-        to get autonomy working in time. It didn't make the deadline, but the qualifying run
-        held.<br><br>
-        I've also kept detailed project logs since September 2025 and organized the team's
-        datasheet archive, and I'm working on a continuity log to help next year's capstone
-        team pick up the project from where we finished.
-    </p>
-    <hr>
-
-    <h2>Rubik's Cube Simulation Project</h2>
+    <h2 id="rubiks-cube">Rubik's Cube Simulation Project</h2>
     <p>
         Through the Electrical & Computer Engineering curriculum at NMSU, there is an Embedded Systems course (EE 112)
         which features a final project in Arduino C++ which allows freedom of design to the
@@ -342,38 +411,74 @@
             repository with Arduino C++ .ino file</a>
     </p>
 
-    <div class="gallery">
-        <a target="_blank" href="src/works/img/2D cube diagram finished.jpg">
-            <img src="src/works/img/2D cube diagram finished.jpg" alt="2D display" width="600" height="400">
-        </a>
-        <div class="desc">2D display mapped to LCD Shield</div>
+    <div class="slideshow" id="rubiks-slideshow">
+        <div class="slideshow__stage">
+            <img id="rubiks-image" src="src/works/img/2D cube diagram finished.jpg" alt="2D display">
+        </div>
+        <p class="slideshow__caption" id="rubiks-caption">2D display mapped to LCD Shield</p>
+        <div class="slideshow__controls">
+            <button type="button" id="rubiks-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="rubiks-count">1 / 4</span>
+            <button type="button" id="rubiks-next">next &#8594;</button>
+        </div>
     </div>
+    <hr>
 
-    <div class="gallery">
-        <a target="_blank" href="src/works/img/3D diagram.jpg">
-            <img src="src/works/img/3D diagram.jpg" alt="3D display" width="600" height="400">
-        </a>
-        <div class="desc">3D display mapped to LCD Shield</div>
-    </div>
+    <h2 id="music-box">Music Box</h2>
+    <p>TODO: description of the Music Box project.</p>
 
-    <div class="gallery">
-        <a target="_blank" href="src/works/img/2D and 3D diagram.jpg">
-            <img src="src/works/img/2D and 3D diagram.jpg" alt="2D/3D completed" width="600" height="400">
-        </a>
-        <div class="desc">2D and 3D mapped to LCD Shield</div>
+    <h3>Box</h3>
+    <p>TODO: paragraph describing the box.</p>
+    <div class="slideshow" id="musicbox-box-slideshow">
+        <div class="slideshow__stage">
+            <img id="musicbox-box-image" src="images/Box/box/box_A.png" alt="TODO alt text - box_A.png">
+        </div>
+        <p class="slideshow__caption" id="musicbox-box-caption">TODO caption - box_A.png</p>
+        <div class="slideshow__controls">
+            <button type="button" id="musicbox-box-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="musicbox-box-count">1 / 11</span>
+            <button type="button" id="musicbox-box-next">next &#8594;</button>
+        </div>
     </div>
+    <hr>
 
-    <div class="gallery">
-        <a target="_blank" href="src/works/img/Demo image.jpg">
-            <img src="src/works/img/Demo image.jpg" alt="Demo image" width="600" height="400">
-        </a>
-        <div class="desc">demo physical vs. virtual</div>
+    <h3>Board</h3>
+    <p>TODO: paragraph describing the board.</p>
+    <div class="slideshow" id="musicbox-board-slideshow">
+        <div class="slideshow__stage">
+            <img id="musicbox-board-image" src="images/Box/board/board_A.jpg" alt="TODO alt text - board_A.jpg">
+        </div>
+        <p class="slideshow__caption" id="musicbox-board-caption">TODO caption - board_A.jpg</p>
+        <div class="slideshow__controls">
+            <button type="button" id="musicbox-board-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="musicbox-board-count">1 / 3</span>
+            <button type="button" id="musicbox-board-next">next &#8594;</button>
+        </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br>
+    <hr>
+
+    <h3>Design</h3>
+    <p>TODO: paragraph describing the design.</p>
+    <div class="slideshow" id="musicbox-design-slideshow">
+        <div class="slideshow__stage">
+            <img id="musicbox-design-image" src="images/Box/design/design_A.png" alt="TODO alt text - design_A.png">
+        </div>
+        <p class="slideshow__caption" id="musicbox-design-caption">TODO caption - design_A.png</p>
+        <div class="slideshow__controls">
+            <button type="button" id="musicbox-design-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="musicbox-design-count">1 / 8</span>
+            <button type="button" id="musicbox-design-next">next &#8594;</button>
+        </div>
+    </div>
+    <hr>
+
+    <h3>Current State</h3>
+    <img src="images/Box/Coated/coated.jpg" alt="TODO alt text - coated.jpg" width="50%" height="50%">
+    <p>TODO caption - coated.jpg</p>
     <hr>
 
 
-    <h2>Dencor - Project Manager</h2>
+    <h2 id="dencor">Dencor - Project Manager</h2>
     <p>
         As the project manager for a small tech company working with Energy Management Systems (EMS), I facilitated several
         projects to completion, one of them being the installation of an EMS at the <a href="https://www.kongcompany.com/" target="_blank"
@@ -402,17 +507,7 @@
     </div>
     <hr>
 
-    <h2>Other</h2>
-    <p>5k (3.1 mile) run <a
-            href="https://docs.google.com/spreadsheets/d/1OyZWtFFBcjbpT9pBkKR9jknppp30H6-xkoSFfJfzxOQ/edit?usp=sharing"
-            target="_blank" rel="noopener noreferrer">log</a></p>
-    <p>I have two dogs, both border collies<br><br> Yuki</p>
-    <img src="src/works/img/yuki_bordercollie.jpg" alt="yuki border collie" width="50%" height="50%">
-    <p>and Rip</p>
-    <img src="src/works/img/rip_bat.jpg" alt="rip border collie" width="50%" height="50%">
-
-
-    <h2>Scratch Self-Learning Exercise "Cake Calamity"</h2>
+    <h2 id="cake-calamity">Scratch Self-Learning Exercise "Cake Calamity"</h2>
     <p>
         While on break from school, I continued to further my education and skills. I took part in Harvard's self-paced
         <a href="https://www.edx.org/learn/computer-science/harvard-university-cs50-s-introduction-to-computer-science"
@@ -434,7 +529,7 @@
 
     <hr>
 
-    <h2>Planet Labs UHF Antenna work</h2>
+    <h2 id="planet-labs">Planet Labs UHF Antenna work</h2>
     <p>
         From January 2020 through to the end of 2024, I was an on-call UHF Technician for Planet Labs PBC, A San
         Francisco-based
@@ -457,7 +552,7 @@
     <hr>
 
 
-    <h2>3D Printing</h2>
+    <h2 id="3d-printing">3D Printing</h2>
 
     <p>
         Several years ago, I took a course which allowed me to become proficient in SolidWorks CAD as well as gain
@@ -486,14 +581,157 @@
     <p>wrench modeled and printed for clean-room use. Made with SolidWorks <br>
         printed using Ender 3 v2 printer with PLA</p>
     <hr>
+
+    <h2 id="other">Other</h2>
+    <p>5k (3.1 mile) run <a
+            href="https://docs.google.com/spreadsheets/d/1OyZWtFFBcjbpT9pBkKR9jknppp30H6-xkoSFfJfzxOQ/edit?usp=sharing"
+            target="_blank" rel="noopener noreferrer">log</a></p>
+    <p>I have two dogs, both border collies<br><br> Yuki</p>
+    <img src="src/works/img/yuki_bordercollie.jpg" alt="yuki border collie" width="50%" height="50%">
+    <p>and Rip</p>
+    <img src="src/works/img/rip_bat.jpg" alt="rip border collie" width="50%" height="50%">
+    <hr>
 </div>
 
 <script>
-    // Dencor install slideshow. The images run 2-7MB each, so only the current
-    // slide is ever given a src - the rest load on demand as you step through,
-    // with the next one prefetched so the click feels instant.
+    // Slideshows. Each one shows a single slide at a time; only that slide is
+    // ever given a src, so the page doesn't pull every image on load, and the
+    // next one is prefetched so stepping forward feels instant.
     (function () {
-        var slides = [
+        function createSlideshow(prefix, slides) {
+            var root = document.getElementById(prefix + '-slideshow');
+            if (!root || !slides.length) return;
+
+            var image = document.getElementById(prefix + '-image');
+            var caption = document.getElementById(prefix + '-caption');
+            var count = document.getElementById(prefix + '-count');
+            var index = 0;
+
+            function show(next) {
+                index = (next + slides.length) % slides.length;
+                var slide = slides[index];
+                image.src = slide.src;
+                image.alt = slide.alt;
+                caption.textContent = slide.caption;
+                count.textContent = (index + 1) + ' / ' + slides.length;
+
+                var upcoming = new Image();
+                upcoming.src = slides[(index + 1) % slides.length].src;
+            }
+
+            document.getElementById(prefix + '-prev').addEventListener('click', function () {
+                show(index - 1);
+            });
+            document.getElementById(prefix + '-next').addEventListener('click', function () {
+                show(index + 1);
+            });
+            image.addEventListener('click', function () {
+                show(index + 1);
+            });
+
+            show(0);
+        }
+
+        // AUV - data architecture diagrams
+        createSlideshow('auv-data', [
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_A.png', alt: 'TODO alt text - data_diagram_A.png', caption: 'TODO caption - data_diagram_A.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_B.png', alt: 'TODO alt text - data_diagram_B.png', caption: 'TODO caption - data_diagram_B.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_C.png', alt: 'TODO alt text - data_diagram_C.png', caption: 'TODO caption - data_diagram_C.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_D.png', alt: 'TODO alt text - data_diagram_D.png', caption: 'TODO caption - data_diagram_D.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_E.png', alt: 'TODO alt text - data_diagram_E.png', caption: 'TODO caption - data_diagram_E.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_F.png', alt: 'TODO alt text - data_diagram_F.png', caption: 'TODO caption - data_diagram_F.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_G.png', alt: 'TODO alt text - data_diagram_G.png', caption: 'TODO caption - data_diagram_G.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_H.png', alt: 'TODO alt text - data_diagram_H.png', caption: 'TODO caption - data_diagram_H.png' },
+            { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_I.png', alt: 'TODO alt text - data_diagram_I.png', caption: 'TODO caption - data_diagram_I.png' }
+        ]);
+
+        // AUV - KiCad schematics
+        createSlideshow('auv-kicad', [
+            { src: 'images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065218.png', alt: 'TODO alt text - Screenshot 2026-09-28 065218.png', caption: 'TODO caption - Screenshot 2026-09-28 065218.png' },
+            { src: 'images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065239.png', alt: 'TODO alt text - Screenshot 2026-09-28 065239.png', caption: 'TODO caption - Screenshot 2026-09-28 065239.png' },
+            { src: 'images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065325.png', alt: 'TODO alt text - Screenshot 2026-09-28 065325.png', caption: 'TODO caption - Screenshot 2026-09-28 065325.png' }
+        ]);
+
+        // AUV - hydrophone preamp PCB
+        createSlideshow('auv-pcb', [
+            { src: 'images/AUV/PCB_Slideshow/PCB_A.png', alt: 'Differential JFET Preamp design integration with AS-1 Hydrophones, early sketches', caption: 'Differential JFET Preamp design integration with AS-1 Hydrophones, early sketches' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_B.png', alt: 'Initial CAD circuit of JFET circuit for one-channel in KiCad before prototype testing', caption: 'Initial CAD circuit of JFET circuit for one-channel in KiCad before prototype testing' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_C.png', alt: '1st Draft at PCB Layout', caption: '1st Draft at PCB Layout' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_D.png', alt: '1st Draft PCB Layout routing', caption: '1st Draft PCB Layout routing' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_E.png', alt: '3D render of first draft A', caption: '3D render of first draft A' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_F.png', alt: '3D render of first draft B', caption: '3D render of first draft B' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_G.png', alt: 'Power array with safety features design in KiCad', caption: 'Power array with safety features design in KiCad' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_H.png', alt: 'redesign to include Mother & Daughter Board', caption: 'redesign to include Mother & Daughter Board' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_I.png', alt: 'daughterboard footprint', caption: 'daughterboard footprint' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_J.png', alt: 'Motherboard design', caption: 'Motherboard design' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_K.png', alt: 'daughterboard design', caption: 'daughterboard design' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_L.png', alt: 'full board design with motherboard & daughterboard attached', caption: 'full board design with motherboard & daughterboard attached' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_M.png', alt: 'CAD - Motherboard', caption: 'CAD - Motherboard' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_N.png', alt: 'CAD - Daughterboard', caption: 'CAD - Daughterboard' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_O.png', alt: 'JLCPCB Fabrication Process', caption: 'JLCPCB Fabrication Process' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_P.png', alt: 'JLCPCB Fabrication Process Ordered!', caption: 'JLCPCB Fabrication Process Ordered!' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_Q.jpg', alt: 'Received boards with SMT components and hand-soldered on ADC board', caption: 'Received boards with SMT components and hand-soldered on ADC board' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_R.jpg', alt: 'completed board with almost all components added on', caption: 'completed board with almost all components added on' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_S.png', alt: 'Wiring harness assembled to connect to Jetson Orin Nano', caption: 'Wiring harness assembled to connect to Jetson Orin Nano' },
+            { src: 'images/AUV/PCB_Slideshow/PCB_T.jpg', alt: 'Investigating a faulty LRCLK signal to integrate I2S signal on Jetson Orin Nano', caption: 'Investigating a faulty LRCLK signal to integrate I2S signal on Jetson Orin Nano' }
+        ]);
+
+        // AUV - misc
+        createSlideshow('auv-misc', [
+            { src: 'images/AUV/MISC/A_shell_design.jpg', alt: 'Shell design', caption: 'Shell design' },
+            { src: 'images/AUV/MISC/B_PM07_Module_Assembly.png', alt: 'PM07 module assembly', caption: 'PM07 module assembly' },
+            { src: 'images/AUV/MISC/C_Tandem_Camera_Testing.png', alt: 'Tandem camera testing', caption: 'Tandem camera testing' },
+            { src: 'images/AUV/MISC/D_Hydrophone_Setup.jpg', alt: 'Hydrophone setup', caption: 'Hydrophone setup' },
+            { src: 'images/AUV/MISC/E_Hydrophone_testing.jpg', alt: 'Hydrophone testing', caption: 'Hydrophone testing' },
+            { src: 'images/AUV/MISC/F_Integration_CubeOrange_FlightController_Jetson.jpg', alt: 'Cube Orange flight controller and Jetson integration', caption: 'Cube Orange flight controller and Jetson integration' },
+            { src: 'images/AUV/MISC/G_MissionPlanner_FlightController_Jeson_Integration.jpg', alt: 'Mission Planner, flight controller, and Jetson integration', caption: 'Mission Planner, flight controller, and Jetson integration' }
+        ]);
+
+
+        // Music Box - the box
+        createSlideshow('musicbox-box', [
+            { src: 'images/Box/box/box_A.png', alt: 'TODO alt text - box_A.png', caption: 'TODO caption - box_A.png' },
+            { src: 'images/Box/box/box_B.png', alt: 'TODO alt text - box_B.png', caption: 'TODO caption - box_B.png' },
+            { src: 'images/Box/box/box_C.jpg', alt: 'TODO alt text - box_C.jpg', caption: 'TODO caption - box_C.jpg' },
+            { src: 'images/Box/box/box_D.jpg', alt: 'TODO alt text - box_D.jpg', caption: 'TODO caption - box_D.jpg' },
+            { src: 'images/Box/box/box_E.jpg', alt: 'TODO alt text - box_E.jpg', caption: 'TODO caption - box_E.jpg' },
+            { src: 'images/Box/box/box_F.jpg', alt: 'TODO alt text - box_F.jpg', caption: 'TODO caption - box_F.jpg' },
+            { src: 'images/Box/box/box_G.jpg', alt: 'TODO alt text - box_G.jpg', caption: 'TODO caption - box_G.jpg' },
+            { src: 'images/Box/box/box_H.jpg', alt: 'TODO alt text - box_H.jpg', caption: 'TODO caption - box_H.jpg' },
+            { src: 'images/Box/box/box_I.jpg', alt: 'TODO alt text - box_I.jpg', caption: 'TODO caption - box_I.jpg' },
+            { src: 'images/Box/box/box_J.jpg', alt: 'TODO alt text - box_J.jpg', caption: 'TODO caption - box_J.jpg' },
+            { src: 'images/Box/box/box_K.jpg', alt: 'TODO alt text - box_K.jpg', caption: 'TODO caption - box_K.jpg' }
+        ]);
+
+        // Music Box - the board
+        createSlideshow('musicbox-board', [
+            { src: 'images/Box/board/board_A.jpg', alt: 'TODO alt text - board_A.jpg', caption: 'TODO caption - board_A.jpg' },
+            { src: 'images/Box/board/board_B.jpg', alt: 'TODO alt text - board_B.jpg', caption: 'TODO caption - board_B.jpg' },
+            { src: 'images/Box/board/board_C.jpg', alt: 'TODO alt text - board_C.jpg', caption: 'TODO caption - board_C.jpg' }
+        ]);
+
+        // Music Box - design
+        createSlideshow('musicbox-design', [
+            { src: 'images/Box/design/design_A.png', alt: 'TODO alt text - design_A.png', caption: 'TODO caption - design_A.png' },
+            { src: 'images/Box/design/design_B.jpg', alt: 'TODO alt text - design_B.jpg', caption: 'TODO caption - design_B.jpg' },
+            { src: 'images/Box/design/design_C.jpg', alt: 'TODO alt text - design_C.jpg', caption: 'TODO caption - design_C.jpg' },
+            { src: 'images/Box/design/design_D.jpg', alt: 'TODO alt text - design_D.jpg', caption: 'TODO caption - design_D.jpg' },
+            { src: 'images/Box/design/design_E.jpg', alt: 'TODO alt text - design_E.jpg', caption: 'TODO caption - design_E.jpg' },
+            { src: 'images/Box/design/design_F.jpg', alt: 'TODO alt text - design_F.jpg', caption: 'TODO caption - design_F.jpg' },
+            { src: 'images/Box/design/design_G.jpg', alt: 'TODO alt text - design_G.jpg', caption: 'TODO caption - design_G.jpg' },
+            { src: 'images/Box/design/design_H.jpg', alt: 'TODO alt text - design_H.jpg', caption: 'TODO caption - design_H.jpg' }
+        ]);
+
+        // Rubik's Cube - LCD display renders
+        createSlideshow('rubiks', [
+            { src: 'src/works/img/2D cube diagram finished.jpg', alt: '2D display', caption: '2D display mapped to LCD Shield' },
+            { src: 'src/works/img/3D diagram.jpg', alt: '3D display', caption: '3D display mapped to LCD Shield' },
+            { src: 'src/works/img/2D and 3D diagram.jpg', alt: '2D/3D completed', caption: '2D and 3D mapped to LCD Shield' },
+            { src: 'src/works/img/Demo image.jpg', alt: 'Demo image', caption: 'demo physical vs. virtual' }
+        ]);
+
+        // Dencor install photos
+        createSlideshow('dencor', [
             { src: 'src/works/img/2-edited.jpg', alt: 'EMS enclosure installed not wired', caption: 'EMS enclosure installed but not wired up' },
             { src: 'src/works/img/3-edited.jpg', alt: 'EMS enclosure and extra enclosure', caption: 'EMS enclosure and other enclosure for more controls' },
             { src: 'src/works/img/4-edited.jpg', alt: 'EMS enclosure wired into facility', caption: 'EMS Enclosure wired into facility' },
@@ -514,40 +752,7 @@
             { src: 'src/works/img/19.PNG', alt: 'Expanded backend monitoring data', caption: 'expanded backend monitoring data' },
             { src: 'src/works/img/20.PNG', alt: 'Energy monitoring UI', caption: 'more energy monitoring UI' },
             { src: 'src/works/img/21 - Residential System Diagram for Reference.png', alt: 'Residential system reference diagram', caption: 'Reference diagram for residential installs' }
-        ];
-
-        var root = document.getElementById('dencor-slideshow');
-        if (!root) return;
-
-        var image = document.getElementById('dencor-image');
-        var caption = document.getElementById('dencor-caption');
-        var count = document.getElementById('dencor-count');
-        var index = 0;
-
-        function show(next) {
-            index = (next + slides.length) % slides.length;
-            var slide = slides[index];
-            image.src = slide.src;
-            image.alt = slide.alt;
-            caption.textContent = slide.caption;
-            count.textContent = (index + 1) + ' / ' + slides.length;
-
-            // Warm the next slide so stepping forward doesn't wait on the download.
-            var upcoming = new Image();
-            upcoming.src = slides[(index + 1) % slides.length].src;
-        }
-
-        document.getElementById('dencor-prev').addEventListener('click', function () {
-            show(index - 1);
-        });
-        document.getElementById('dencor-next').addEventListener('click', function () {
-            show(index + 1);
-        });
-        image.addEventListener('click', function () {
-            show(index + 1);
-        });
-
-        show(0);
+        ]);
     })();
 </script>
 </body>
