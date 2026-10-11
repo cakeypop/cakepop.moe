@@ -99,27 +99,33 @@
     /* Slideshow: one image at a time, advanced by the prev/next buttons or by
        clicking the image. The stage keeps a fixed aspect ratio so the page
        doesn't jump when stepping between portrait and landscape shots. */
+    /* Controls sit above the image. Since the stage height now varies with each
+       image, anything below it shifts as you step through; keeping prev/next
+       pinned above the image means the buttons stay put under the pointer. */
     .slideshow {
-        width: 50%;
-        min-width: 280px;
+        width: 100%;
         margin: 16px 0 24px;
+        display: flex;
+        flex-direction: column;
     }
 
+    /* The stage grows to whatever the image needs rather than letterboxing it
+       into a fixed box, so wide diagrams render at full width instead of being
+       shrunk to fit a 4:3 frame. */
     .slideshow__stage {
+        order: 2;
         position: relative;
-        aspect-ratio: 4 / 3;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
         background: #566777;
         border: 1px solid #44525f;
         border-radius: 4px;
+        padding: 8px;
     }
 
     .slideshow__stage img {
         max-width: 100%;
-        max-height: 100%;
         width: auto;
         height: auto;
         display: block;
@@ -127,14 +133,17 @@
     }
 
     .slideshow__caption {
+        order: 3;
         margin: 8px 0 8px;
         min-height: 3em;
     }
 
     .slideshow__controls {
+        order: 1;
         display: flex;
         align-items: center;
         gap: 12px;
+        margin-bottom: 8px;
     }
 
     .slideshow__controls button {
@@ -153,6 +162,32 @@
 
     .slideshow__count {
         font-variant-numeric: tabular-nums;
+    }
+
+    /* Clickable preview of the team site. */
+    .site-preview {
+        display: inline-block;
+        max-width: 560px;
+        margin: 8px 0 16px;
+        border: 1px solid #44525f;
+        border-radius: 4px;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+    .site-preview img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .site-preview:hover {
+        border-color: #2a3744;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .slideshow__full {
+        color: #2a3744;
     }
 
     @media (max-width: 720px) {
@@ -232,6 +267,7 @@
         <h2 class="toc__title">Jump to</h2>
         <ul>
             <li><a href="#auv">Autonomous Underwater Vehicle (AUV)</a></li>
+            <li><a href="#urs">Undergraduate Research Scholar (URS)</a></li>
             <li><a href="#rubiks-cube">Rubik's Cube Simulation Project</a></li>
             <li><a href="#music-box">Music Box</a></li>
             <li><a href="#dencor">Dencor - Project Manager</a></li>
@@ -275,7 +311,7 @@
             allowfullscreen></iframe>
     </div>
 
-    <h3>4-Channel Differential JFET Preamp + ADC PCB Design To Process Hydrophone Audio via I2S</h3>
+    <h3>AUV - 4-Channel Differential JFET Preamp + ADC PCB Design To Process Hydrophone Audio via I2S</h3>
     <p>
         Designed a custom board to process analog hydrophone data for Time Difference of
         Arrival (TDoA) onboard calculations by the AUV computer. Differential JFET Preamp
@@ -285,76 +321,87 @@
     </p>
     <div class="slideshow" id="auv-pcb-slideshow">
         <div class="slideshow__stage">
-            <img id="auv-pcb-image" src="images/AUV/PCB_Slideshow/PCB_A.png"
-                alt="Differential JFET Preamp design integration with AS-1 Hydrophones, early sketches">
+            <img id="auv-pcb-image" src="images/AUV/PCB_Slideshow/PCB_L.png" alt="full board design with motherboard &amp; daughterboard attached">
         </div>
-        <p class="slideshow__caption" id="auv-pcb-caption">Differential JFET Preamp design integration with AS-1
-            Hydrophones, early sketches</p>
+        <p class="slideshow__caption" id="auv-pcb-caption">full board design with motherboard &amp; daughterboard attached</p>
         <div class="slideshow__controls">
             <button type="button" id="auv-pcb-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="auv-pcb-count">1 / 20</span>
+            <span class="slideshow__count" id="auv-pcb-count">Featured</span>
             <button type="button" id="auv-pcb-next">next &#8594;</button>
+            <a class="slideshow__full" id="auv-pcb-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
 
-    <h3>KiCad Schematics</h3>
+    <h3>AUV - KiCad Schematics</h3>
     <p>TODO: paragraph describing the schematics.</p>
     <div class="slideshow" id="auv-kicad-slideshow">
         <div class="slideshow__stage">
-            <img id="auv-kicad-image" src="images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065218.png" alt="TODO alt text - Screenshot 2026-09-28 065218.png">
+            <img id="auv-kicad-image" src="images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065325.png" alt="TODO alt text - Screenshot 2026-09-28 065325.png">
         </div>
-        <p class="slideshow__caption" id="auv-kicad-caption">TODO caption - Screenshot 2026-09-28 065218.png</p>
+        <p class="slideshow__caption" id="auv-kicad-caption">TODO caption - Screenshot 2026-09-28 065325.png</p>
         <div class="slideshow__controls">
             <button type="button" id="auv-kicad-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="auv-kicad-count">1 / 3</span>
+            <span class="slideshow__count" id="auv-kicad-count">Featured</span>
             <button type="button" id="auv-kicad-next">next &#8594;</button>
+            <a class="slideshow__full" id="auv-kicad-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
 
-    <h3>System Architecture Diagrams</h3>
+    <h3>AUV - System Architecture Diagrams</h3>
     <p>TODO: paragraph describing the data architecture.</p>
     <div class="slideshow" id="auv-data-slideshow">
         <div class="slideshow__stage">
-            <img id="auv-data-image" src="images/AUV/Data_Diagram_Slideshow/data_diagram_A.png" alt="TODO alt text - data_diagram_A.png">
+            <img id="auv-data-image" src="images/AUV/Data_Diagram_Slideshow/data_diagram_I.png" alt="TODO alt text - data_diagram_I.png">
         </div>
-        <p class="slideshow__caption" id="auv-data-caption">TODO caption - data_diagram_A.png</p>
+        <p class="slideshow__caption" id="auv-data-caption">TODO caption - data_diagram_I.png</p>
         <div class="slideshow__controls">
             <button type="button" id="auv-data-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="auv-data-count">1 / 9</span>
+            <span class="slideshow__count" id="auv-data-count">Featured</span>
             <button type="button" id="auv-data-next">next &#8594;</button>
+            <a class="slideshow__full" id="auv-data-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
 
-    <h3>Misc</h3>
+    <h3>AUV - Misc</h3>
     <p>TODO: paragraph for the misc images (folder still being updated).</p>
     <div class="slideshow" id="auv-misc-slideshow">
         <div class="slideshow__stage">
-            <img id="auv-misc-image" src="images/AUV/MISC/A_shell_design.jpg" alt="Shell design">
+            <img id="auv-misc-image" src="images/AUV/MISC/G_MissionPlanner_FlightController_Jeson_Integration.jpg" alt="Mission Planner, flight controller, and Jetson integration">
         </div>
-        <p class="slideshow__caption" id="auv-misc-caption">Shell design</p>
+        <p class="slideshow__caption" id="auv-misc-caption">Mission Planner, flight controller, and Jetson integration</p>
         <div class="slideshow__controls">
             <button type="button" id="auv-misc-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="auv-misc-count">1 / 7</span>
+            <span class="slideshow__count" id="auv-misc-count">Featured</span>
             <button type="button" id="auv-misc-next">next &#8594;</button>
+            <a class="slideshow__full" id="auv-misc-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
 
-    <h3>Team Website &amp; Media</h3>
+    <h3>AUV - Team Webpage</h3>
     <p>
-        Created the <a href="kraken.html" target="_blank" rel="noopener noreferrer">website</a> for the
+        Created the <a href="kraken.html" target="_blank" rel="noopener noreferrer">Team Webpage</a> for the
         NMSU Kraken Submersibles RoboSub 2026 team, which placed 18th out of 58 teams
         (<a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRFIz4fUxtK1p7pD0GRf8mYJGdG5wNQq_L8wrNF_xvTL37KEJT3oGB66BJb31gaiFGohmNzaSKBBYOA/pubhtml"
             target="_blank" rel="noopener noreferrer">full results</a>).
     </p>
+    <a class="site-preview" href="kraken.html" target="_blank" rel="noopener noreferrer">
+        <img src="images/AUV/website_snapshot.png"
+            alt="Screenshot of the Kraken Submersibles team website">
+    </a>
     <p>Planned and edited the team introduction video.</p>
     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2smvYpim8k"
         title="YouTube video player" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
+    <hr>
+
+    <h2 id="urs">Undergraduate Research Scholar (URS) - Open-Source Software Electronic Design
+        Automation (EDA) Development</h2>
+    <p>TODO: description of the URS open-source EDA development work.</p>
     <hr>
 
     <h2 id="rubiks-cube">Rubik's Cube Simulation Project</h2>
@@ -413,13 +460,14 @@
 
     <div class="slideshow" id="rubiks-slideshow">
         <div class="slideshow__stage">
-            <img id="rubiks-image" src="src/works/img/2D cube diagram finished.jpg" alt="2D display">
+            <img id="rubiks-image" src="src/works/img/2D and 3D diagram.jpg" alt="2D/3D completed">
         </div>
-        <p class="slideshow__caption" id="rubiks-caption">2D display mapped to LCD Shield</p>
+        <p class="slideshow__caption" id="rubiks-caption">2D and 3D mapped to LCD Shield</p>
         <div class="slideshow__controls">
             <button type="button" id="rubiks-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="rubiks-count">1 / 4</span>
+            <span class="slideshow__count" id="rubiks-count">Featured</span>
             <button type="button" id="rubiks-next">next &#8594;</button>
+            <a class="slideshow__full" id="rubiks-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
@@ -427,52 +475,55 @@
     <h2 id="music-box">Music Box</h2>
     <p>TODO: description of the Music Box project.</p>
 
-    <h3>Box</h3>
+    <h3>Music Box - Box</h3>
     <p>TODO: paragraph describing the box.</p>
     <div class="slideshow" id="musicbox-box-slideshow">
         <div class="slideshow__stage">
-            <img id="musicbox-box-image" src="images/Box/box/box_A.png" alt="TODO alt text - box_A.png">
+            <img id="musicbox-box-image" src="images/Box/box/box_J.jpg" alt="TODO alt text - box_J.jpg">
         </div>
-        <p class="slideshow__caption" id="musicbox-box-caption">TODO caption - box_A.png</p>
+        <p class="slideshow__caption" id="musicbox-box-caption">TODO caption - box_J.jpg</p>
         <div class="slideshow__controls">
             <button type="button" id="musicbox-box-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="musicbox-box-count">1 / 11</span>
+            <span class="slideshow__count" id="musicbox-box-count">Featured</span>
             <button type="button" id="musicbox-box-next">next &#8594;</button>
+            <a class="slideshow__full" id="musicbox-box-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
 
-    <h3>Board</h3>
+    <h3>Music Box - Board</h3>
     <p>TODO: paragraph describing the board.</p>
     <div class="slideshow" id="musicbox-board-slideshow">
         <div class="slideshow__stage">
-            <img id="musicbox-board-image" src="images/Box/board/board_A.jpg" alt="TODO alt text - board_A.jpg">
+            <img id="musicbox-board-image" src="images/Box/board/board_C.jpg" alt="TODO alt text - board_C.jpg">
         </div>
-        <p class="slideshow__caption" id="musicbox-board-caption">TODO caption - board_A.jpg</p>
+        <p class="slideshow__caption" id="musicbox-board-caption">TODO caption - board_C.jpg</p>
         <div class="slideshow__controls">
             <button type="button" id="musicbox-board-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="musicbox-board-count">1 / 3</span>
+            <span class="slideshow__count" id="musicbox-board-count">Featured</span>
             <button type="button" id="musicbox-board-next">next &#8594;</button>
+            <a class="slideshow__full" id="musicbox-board-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
 
-    <h3>Design</h3>
+    <h3>Music Box - Design</h3>
     <p>TODO: paragraph describing the design.</p>
     <div class="slideshow" id="musicbox-design-slideshow">
         <div class="slideshow__stage">
-            <img id="musicbox-design-image" src="images/Box/design/design_A.png" alt="TODO alt text - design_A.png">
+            <img id="musicbox-design-image" src="images/Box/design/design_H.jpg" alt="TODO alt text - design_H.jpg">
         </div>
-        <p class="slideshow__caption" id="musicbox-design-caption">TODO caption - design_A.png</p>
+        <p class="slideshow__caption" id="musicbox-design-caption">TODO caption - design_H.jpg</p>
         <div class="slideshow__controls">
             <button type="button" id="musicbox-design-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="musicbox-design-count">1 / 8</span>
+            <span class="slideshow__count" id="musicbox-design-count">Featured</span>
             <button type="button" id="musicbox-design-next">next &#8594;</button>
+            <a class="slideshow__full" id="musicbox-design-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
 
-    <h3>Current State</h3>
+    <h3>Music Box - carpentry complete</h3>
     <img src="images/Box/Coated/coated.jpg" alt="TODO alt text - coated.jpg" width="50%" height="50%">
     <p>TODO caption - coated.jpg</p>
     <hr>
@@ -496,13 +547,14 @@
     </p>
     <div class="slideshow" id="dencor-slideshow">
         <div class="slideshow__stage">
-            <img id="dencor-image" src="src/works/img/2-edited.jpg" alt="EMS enclosure installed not wired">
+            <img id="dencor-image" src="src/works/img/4-edited.jpg" alt="EMS enclosure wired into facility">
         </div>
-        <p class="slideshow__caption" id="dencor-caption">EMS enclosure installed but not wired up</p>
+        <p class="slideshow__caption" id="dencor-caption">EMS Enclosure wired into facility</p>
         <div class="slideshow__controls">
             <button type="button" id="dencor-prev">&#8592; prev</button>
-            <span class="slideshow__count" id="dencor-count">1 / 20</span>
+            <span class="slideshow__count" id="dencor-count">Featured</span>
             <button type="button" id="dencor-next">next &#8594;</button>
+            <a class="slideshow__full" id="dencor-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
         </div>
     </div>
     <hr>
@@ -586,10 +638,10 @@
     <p>5k (3.1 mile) run <a
             href="https://docs.google.com/spreadsheets/d/1OyZWtFFBcjbpT9pBkKR9jknppp30H6-xkoSFfJfzxOQ/edit?usp=sharing"
             target="_blank" rel="noopener noreferrer">log</a></p>
-    <p>I have two dogs, both border collies<br><br> Yuki</p>
-    <img src="src/works/img/yuki_bordercollie.jpg" alt="yuki border collie" width="50%" height="50%">
-    <p>and Rip</p>
-    <img src="src/works/img/rip_bat.jpg" alt="rip border collie" width="50%" height="50%">
+    <p>I run with my dogs, border collies<br><br> Yuki Tempest Rain</p>
+    <img src="src/works/img/yuki_bordercollie.jpg" alt="Yuki Tempest Rain, border collie" width="50%" height="50%">
+    <p>and Hawaiian Riptide "Rip" Cloud</p>
+    <img src="src/works/img/rip_bat.jpg" alt="Hawaiian Riptide &quot;Rip&quot; Cloud, border collie" width="50%" height="50%">
     <hr>
 </div>
 
@@ -598,13 +650,24 @@
     // ever given a src, so the page doesn't pull every image on load, and the
     // next one is prefetched so stepping forward feels instant.
     (function () {
-        function createSlideshow(prefix, slides) {
+        // showcase is an optional 1-based index into slides. That image is
+        // pinned as slide 1 so the strongest shot is what you land on; the
+        // full set then follows in its original order, so the showcase image
+        // appears twice - once up front, once in its natural position.
+        function createSlideshow(prefix, slides, showcase) {
             var root = document.getElementById(prefix + '-slideshow');
             if (!root || !slides.length) return;
+
+            var pinned = false;
+            if (showcase && slides[showcase - 1]) {
+                slides = [slides[showcase - 1]].concat(slides);
+                pinned = true;
+            }
 
             var image = document.getElementById(prefix + '-image');
             var caption = document.getElementById(prefix + '-caption');
             var count = document.getElementById(prefix + '-count');
+            var full = document.getElementById(prefix + '-full');
             var index = 0;
 
             function show(next) {
@@ -613,7 +676,16 @@
                 image.src = slide.src;
                 image.alt = slide.alt;
                 caption.textContent = slide.caption;
-                count.textContent = (index + 1) + ' / ' + slides.length;
+                // With a pinned showcase, slide 0 is a duplicate of one later
+                // in the set. Labelling it instead of numbering it keeps the
+                // count honest: N is the real photo count, and 1..N are the
+                // images in their original order.
+                if (pinned) {
+                    count.textContent = index === 0 ? 'Featured' : index + ' / ' + (slides.length - 1);
+                } else {
+                    count.textContent = (index + 1) + ' / ' + slides.length;
+                }
+                if (full) full.href = slide.src;
 
                 var upcoming = new Image();
                 upcoming.src = slides[(index + 1) % slides.length].src;
@@ -643,14 +715,14 @@
             { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_G.png', alt: 'TODO alt text - data_diagram_G.png', caption: 'TODO caption - data_diagram_G.png' },
             { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_H.png', alt: 'TODO alt text - data_diagram_H.png', caption: 'TODO caption - data_diagram_H.png' },
             { src: 'images/AUV/Data_Diagram_Slideshow/data_diagram_I.png', alt: 'TODO alt text - data_diagram_I.png', caption: 'TODO caption - data_diagram_I.png' }
-        ]);
+        ], 9);
 
         // AUV - KiCad schematics
         createSlideshow('auv-kicad', [
             { src: 'images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065218.png', alt: 'TODO alt text - Screenshot 2026-09-28 065218.png', caption: 'TODO caption - Screenshot 2026-09-28 065218.png' },
             { src: 'images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065239.png', alt: 'TODO alt text - Screenshot 2026-09-28 065239.png', caption: 'TODO caption - Screenshot 2026-09-28 065239.png' },
             { src: 'images/AUV/KiCad_Schematics/Screenshot%202026-09-28%20065325.png', alt: 'TODO alt text - Screenshot 2026-09-28 065325.png', caption: 'TODO caption - Screenshot 2026-09-28 065325.png' }
-        ]);
+        ], 3);
 
         // AUV - hydrophone preamp PCB
         createSlideshow('auv-pcb', [
@@ -674,7 +746,7 @@
             { src: 'images/AUV/PCB_Slideshow/PCB_R.jpg', alt: 'completed board with almost all components added on', caption: 'completed board with almost all components added on' },
             { src: 'images/AUV/PCB_Slideshow/PCB_S.png', alt: 'Wiring harness assembled to connect to Jetson Orin Nano', caption: 'Wiring harness assembled to connect to Jetson Orin Nano' },
             { src: 'images/AUV/PCB_Slideshow/PCB_T.jpg', alt: 'Investigating a faulty LRCLK signal to integrate I2S signal on Jetson Orin Nano', caption: 'Investigating a faulty LRCLK signal to integrate I2S signal on Jetson Orin Nano' }
-        ]);
+        ], 12);
 
         // AUV - misc
         createSlideshow('auv-misc', [
@@ -685,7 +757,7 @@
             { src: 'images/AUV/MISC/E_Hydrophone_testing.jpg', alt: 'Hydrophone testing', caption: 'Hydrophone testing' },
             { src: 'images/AUV/MISC/F_Integration_CubeOrange_FlightController_Jetson.jpg', alt: 'Cube Orange flight controller and Jetson integration', caption: 'Cube Orange flight controller and Jetson integration' },
             { src: 'images/AUV/MISC/G_MissionPlanner_FlightController_Jeson_Integration.jpg', alt: 'Mission Planner, flight controller, and Jetson integration', caption: 'Mission Planner, flight controller, and Jetson integration' }
-        ]);
+        ], 7);
 
 
         // Music Box - the box
@@ -701,14 +773,14 @@
             { src: 'images/Box/box/box_I.jpg', alt: 'TODO alt text - box_I.jpg', caption: 'TODO caption - box_I.jpg' },
             { src: 'images/Box/box/box_J.jpg', alt: 'TODO alt text - box_J.jpg', caption: 'TODO caption - box_J.jpg' },
             { src: 'images/Box/box/box_K.jpg', alt: 'TODO alt text - box_K.jpg', caption: 'TODO caption - box_K.jpg' }
-        ]);
+        ], 10);
 
         // Music Box - the board
         createSlideshow('musicbox-board', [
             { src: 'images/Box/board/board_A.jpg', alt: 'TODO alt text - board_A.jpg', caption: 'TODO caption - board_A.jpg' },
             { src: 'images/Box/board/board_B.jpg', alt: 'TODO alt text - board_B.jpg', caption: 'TODO caption - board_B.jpg' },
             { src: 'images/Box/board/board_C.jpg', alt: 'TODO alt text - board_C.jpg', caption: 'TODO caption - board_C.jpg' }
-        ]);
+        ], 3);
 
         // Music Box - design
         createSlideshow('musicbox-design', [
@@ -720,7 +792,7 @@
             { src: 'images/Box/design/design_F.jpg', alt: 'TODO alt text - design_F.jpg', caption: 'TODO caption - design_F.jpg' },
             { src: 'images/Box/design/design_G.jpg', alt: 'TODO alt text - design_G.jpg', caption: 'TODO caption - design_G.jpg' },
             { src: 'images/Box/design/design_H.jpg', alt: 'TODO alt text - design_H.jpg', caption: 'TODO caption - design_H.jpg' }
-        ]);
+        ], 8);
 
         // Rubik's Cube - LCD display renders
         createSlideshow('rubiks', [
@@ -728,7 +800,7 @@
             { src: 'src/works/img/3D diagram.jpg', alt: '3D display', caption: '3D display mapped to LCD Shield' },
             { src: 'src/works/img/2D and 3D diagram.jpg', alt: '2D/3D completed', caption: '2D and 3D mapped to LCD Shield' },
             { src: 'src/works/img/Demo image.jpg', alt: 'Demo image', caption: 'demo physical vs. virtual' }
-        ]);
+        ], 3);
 
         // Dencor install photos
         createSlideshow('dencor', [
@@ -752,7 +824,7 @@
             { src: 'src/works/img/19.PNG', alt: 'Expanded backend monitoring data', caption: 'expanded backend monitoring data' },
             { src: 'src/works/img/20.PNG', alt: 'Energy monitoring UI', caption: 'more energy monitoring UI' },
             { src: 'src/works/img/21 - Residential System Diagram for Reference.png', alt: 'Residential system reference diagram', caption: 'Reference diagram for residential installs' }
-        ]);
+        ], 3);
     })();
 </script>
 </body>
