@@ -409,7 +409,42 @@
 
     <h2 id="urs">Undergraduate Research Scholar (URS) - Open-Source Software Electronic Design
         Automation (EDA) Development</h2>
-    <p>TODO: description of the URS open-source EDA development work.</p>
+    <p>
+        As an NM AMP Undergraduate Research Scholar working under Dr. Mario Renteria-Pinon, I
+        stood up a complete open-source EDA workstation for RRAM and SRAM circuit design,
+        simulation, layout, and verification, then tested whether that flow can replace
+        commercial tools for ECE coursework and undergraduate research.
+    </p>
+    <p>
+        I determined the hardware the stack would need and specified the build: an Intel Xeon
+        w7-3455 with 64 GB DDR5 ECC, an NVIDIA RTX 4000 Ada, and 2.5 TB of NVMe, running Red
+        Hat Enterprise Linux 9.7. On that machine I installed xschem, ngspice, Magic, KLayout,
+        netgen, Yosys, Icarus Verilog, and GTKWave, along with the SkyWater sky130A PDK and
+        the Caravel user-project harness.
+        Bit cells, sense amplifiers, and decoder-driven arrays were then captured and
+        simulated end to end and compared against their Cadence Virtuoso equivalents.
+    </p>
+    <p>
+        The open-source stack covers the full loop used in NMSU's analog and mixed-signal
+        coursework, from schematic capture through simulation, layout, and DRC/LVS to GDS. A
+        one-time $4,200 workstation replaces recurring per-seat licensing, freeing roughly
+        $100k per year of instructional budget, and the open PDK gives students a documented
+        path to fabrication rather than a simulation-only exercise.
+    </p>
+    <div class="slideshow" id="urs-slideshow">
+        <div class="slideshow__stage">
+            <img id="urs-image" src="images/URS/image4.png"
+                alt="The same class of layout opened in KLayout.">
+        </div>
+        <p class="slideshow__caption" id="urs-caption">The same class of layout opened in KLayout,
+            the open-source replacement, showing parity between the two flows.</p>
+        <div class="slideshow__controls">
+            <button type="button" id="urs-prev">&#8592; prev</button>
+            <span class="slideshow__count" id="urs-count">Featured</span>
+            <button type="button" id="urs-next">next &#8594;</button>
+            <a class="slideshow__full" id="urs-full" href="#" target="_blank" rel="noopener noreferrer">open full size &#8599;</a>
+        </div>
+    </div>
     <hr>
 
     <h2 id="rubiks-cube">Rubik's Cube Simulation Project</h2>
@@ -707,6 +742,11 @@
                     count.textContent = (index + 1) + ' / ' + slides.length;
                 }
                 if (full) full.href = slide.src;
+                // Transparent PNGs would otherwise show the slate stage colour
+                // through the artwork. The backdrop goes on the image itself,
+                // not the stage, so it only sits behind the artwork rather
+                // than stretching the full width of the page.
+                image.style.background = slide.bg || '';
 
                 var upcoming = new Image();
                 upcoming.src = slides[(index + 1) % slides.length].src;
@@ -821,6 +861,15 @@
             { src: 'src/works/img/3D diagram.jpg', alt: '3D display', caption: '3D display mapped to LCD Shield' },
             { src: 'src/works/img/2D and 3D diagram.jpg', alt: '2D/3D completed', caption: '2D and 3D mapped to LCD Shield' },
             { src: 'src/works/img/Demo image.jpg', alt: 'Demo image', caption: 'demo physical vs. virtual' }
+        ], 3);
+
+        // URS - open-source EDA research
+        createSlideshow('urs', [
+            { src: 'images/URS/image1.png', bg: '#fff', alt: 'Workstation bill of materials, with the entire cost in one-time hardware and no software licensing.', caption: 'Workstation bill of materials. The entire cost is one-time hardware; the open-source EDA software contributes $0 in licensing.' },
+            { src: 'images/URS/image3.png', alt: 'A chip layout opened in Cadence Virtuoso.', caption: 'A chip layout opened in Cadence Virtuoso, the commercial tool.' },
+            { src: 'images/URS/image4.png', alt: 'The same class of layout opened in KLayout.', caption: 'The same class of layout opened in KLayout, the open-source replacement, showing parity between the two flows.' },
+            { src: 'images/URS/image5.png', alt: 'Decoder-driven 6T memory array drawn in xschem.', caption: 'Decoder-driven 6T memory array, captured and simulated in xschem on the sky130A PDK.' },
+            { src: 'images/URS/image6.png', alt: 'Sense amplifier drawn in xschem.', caption: 'Sense amplifier for the array read path, drawn and simulated in xschem alongside the bit cells.' }
         ], 3);
 
         // Dencor install photos
