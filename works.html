@@ -196,11 +196,21 @@
         }
     }
 
+    /* The embeds carry width="560" height="315" attributes, which would
+       otherwise pin them to 560px regardless of how much room the column
+       has. Scaling to the column and holding 16:9 lets them fill it. */
+    iframe {
+        display: block;
+        width: 100%;
+        max-width: 860px;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        border: 0;
+    }
+
     /* Stacked videos, each with its label above. Without display:block the
        iframes are inline and sit side by side whenever two of them fit. */
     .video-list iframe {
-        display: block;
-        max-width: 100%;
         margin-bottom: 20px;
     }
 
